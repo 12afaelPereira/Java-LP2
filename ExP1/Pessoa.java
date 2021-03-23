@@ -8,6 +8,7 @@ public class Pessoa{
     // data de nascimento
     private double peso = 0.0;
     private double altura = 0.0;
+    private String genero = "";
     private String status = "Fazendo nada...";
     private int idade = 0;
 
@@ -16,10 +17,7 @@ public class Pessoa{
     private Pessoa mae = null;
     
     // Enumeracao
-    enum genero{
-        MASCULINO,
-        FEMININO
-    }
+    String[] generos = {"masculino", "feminino"};
 
 
     // *** Construtores ***
@@ -60,6 +58,10 @@ public class Pessoa{
         return this.altura;
     }
 
+    public String getGenero(){
+        return this.genero == generos[0]? "masculino" : 
+            this.genero == generos[1]? "feminino": "outro genero";
+    }
     // public String getPai(){
     //     return this.pai.nome;
     // }
@@ -86,6 +88,15 @@ public class Pessoa{
     public void setAltura(double altura){
         this.altura = altura;
     }
+
+    public void setGenero(String genero){
+        if ( (genero.toLowerCase() != "masculino") && (genero.toLowerCase() != "feminino") ){
+            System.out.println("Nao foi possivel setar o genero. Escolha entre masculino ou feminino");
+        }
+        else{
+            this.genero = genero;
+        }
+    }    
 
     // public void setPai(String nome){
     //     this.pai.nome = nome;
