@@ -1,12 +1,13 @@
 public class Pessoa{
     
     // *** Atributos ***
+    private static int numeroDeInstancias = 0;
+
     private String nome = "";
     private String sobrenome = "";
     // data de nascimento
     private double peso = 0.0;
     private double altura = 0.0;
-    // genero
     private String status = "Fazendo nada...";
     private int idade = 0;
 
@@ -14,22 +15,30 @@ public class Pessoa{
     private Pessoa pai = null;
     private Pessoa mae = null;
     
+    // Enumeracao
+    enum genero{
+        MASCULINO,
+        FEMININO
+    }
 
 
     // *** Construtores ***
     public Pessoa(String nome){
         this.nome = nome;
+        numeroDeInstancias++;
     }
 
     public Pessoa(String nome, String sobrenome){
         this.nome = nome;
         this.sobrenome = sobrenome;
+        numeroDeInstancias++;
     }
 
     public Pessoa(String nome, String sobrenome, double peso, double altura){
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.peso = peso;
+        numeroDeInstancias++;
     }
 
 
@@ -94,7 +103,7 @@ public class Pessoa{
     }
 
     public String toString(){
-        return "0";
+        return "nome: " + this.nome + System.lineSeparator();
     } 
 
     private int getIdade(){
