@@ -1,3 +1,6 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Pessoa{
     
     // *** Atributos ***
@@ -5,37 +8,36 @@ public class Pessoa{
 
     private String nome = "";
     private String sobrenome = "";
-    // data de nascimento
+    private GregorianCalendar dataDeNascimento = null;
     private double peso = 0.0;
     private double altura = 0.0;
     private String genero = "";
     private String status = "Fazendo nada...";
-    private int idade = 0;
+    private int anoCorrente = Calendar.getInstance().get(Calendar.YEAR); 
 
     // Atributos Especiais
     private Pessoa pai = null;
     private Pessoa mae = null;
-    
-    // Enumeracao
-    String[] generos = {"masculino", "feminino"};
 
 
     // *** Construtores ***
+    public Pessoa(){
+        numeroDeInstancias++;
+    }
+
     public Pessoa(String nome){
         this.nome = nome;
         numeroDeInstancias++;
     }
 
-    public Pessoa(String nome, String sobrenome){
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        numeroDeInstancias++;
-    }
+    public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, String genero, double peso, double altura){
+        this.setNome(nome);
+        this.setSobreNome(sobrenome);
+        this.setDataDeNascimento(dia, mes, ano);
+        this.setGenero(genero);
+        this.setPeso(peso);
+        this.setAltura(altura);
 
-    public Pessoa(String nome, String sobrenome, double peso, double altura){
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.peso = peso;
         numeroDeInstancias++;
     }
 
@@ -50,6 +52,12 @@ public class Pessoa{
         return this.sobrenome;
     }
 
+    public String getDataDeNascimento(){
+        return this.dataDeNascimento.get(Calendar.DATE) 
+            + "/" + this.dataDeNascimento.get(Calendar.MONTH)
+            + "/" + this.dataDeNascimento.get(Calendar.YEAR);
+    }
+
     public double getPeso(){
         return this.peso;
     }
@@ -59,9 +67,9 @@ public class Pessoa{
     }
 
     public String getGenero(){
-        return this.genero == generos[0]? "masculino" : 
-            this.genero == generos[1]? "feminino": "outro genero";
+        return this.genero;
     }
+    
     // public String getPai(){
     //     return this.pai.nome;
     // }
@@ -81,20 +89,34 @@ public class Pessoa{
         this.sobrenome = sobrenome;
     }
 
+    public void setDataDeNascimento(int dia, int mes, int ano){
+        dataDeNascimento = new GregorianCalendar(ano, mes, dia);
+    }
+
     public void setPeso(double peso){
-        this.peso = peso;
+        if(peso>=45 && peso<=200){
+            this.peso = peso;
+        }
+        else{
+            System.out.println("Nao foi possivel setar peso. Escolha um valor entre 45 e 200");
+        }
     }
 
     public void setAltura(double altura){
-        this.altura = altura;
+        if(altura >= 1.5 && altura <= 2.5){
+            this.altura = altura;
+        }
+        else{
+            System.out.println("Nao foi possivel setar altura. Escolha um valor entre 1.5 e 2.5");
+        }
     }
 
     public void setGenero(String genero){
-        if ( (genero.toLowerCase() != "masculino") && (genero.toLowerCase() != "feminino") ){
+        if ( (!genero.toLowerCase().equals("masculino") && (!genero.toLowerCase().equals("feminino"))) ){
             System.out.println("Nao foi possivel setar o genero. Escolha entre masculino ou feminino");
         }
         else{
-            this.genero = genero;
+            this.genero = genero.toLowerCase();
         }
     }    
 
@@ -109,15 +131,30 @@ public class Pessoa{
 
 
     // *** Metodos especiais ***
+    public int getNumeroDeInstancias(){
+        return numeroDeInstancias;
+    }
+
     public String getStatus(){
         return this.status;
     }
 
+    @Override
     public String toString(){
-        return "nome: " + this.nome + System.lineSeparator();
+        return "************** Pessoa Info **************" + System.lineSeparator()
+        + "nome: " + this.getNome() + System.lineSeparator()
+        + "Sobrenome: " + this.getSobreNome() + System.lineSeparator()
+        + "Genero: " + this.getGenero() + System.lineSeparator()
+        + "Data de nascimento: " + this.getDataDeNascimento() + System.lineSeparator()
+        + "Altura: " + this.getAltura() + "m" + System.lineSeparator()
+        + "Peso: " + this.getPeso() + "kg" + System.lineSeparator()
+        + "status: " + this.getStatus() + System.lineSeparator()
+        + "idade: " + this.getIdade() + System.lineSeparator();
     } 
 
     private int getIdade(){
-        return this.idade;
+        int idade = anoCorrente - this.dataDeNascimento.get(Calendar.YEAR);
+
+        return idade;
     }
 }
