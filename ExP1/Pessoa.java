@@ -53,7 +53,11 @@ public class Pessoa{
     }
 
     public String getDataDeNascimento(){
-        return this.dataDeNascimento.get(Calendar.DATE) 
+        if(dataDeNascimento == null){
+            return "O usuario nao possui data da nascimento preenchida";
+        }
+
+        return "" + this.dataDeNascimento.get(Calendar.DATE) 
             + "/" + this.dataDeNascimento.get(Calendar.MONTH)
             + "/" + this.dataDeNascimento.get(Calendar.YEAR);
     }
@@ -139,6 +143,16 @@ public class Pessoa{
         return this.status;
     }
 
+    private int getIdade(){
+        if(dataDeNascimento == null){
+            return 0;
+        }
+
+        int idade = anoCorrente - this.dataDeNascimento.get(Calendar.YEAR);
+
+        return idade;
+    }
+
     @Override
     public String toString(){
         return "************** Pessoa Info **************" + System.lineSeparator()
@@ -150,11 +164,5 @@ public class Pessoa{
         + "Peso: " + this.getPeso() + "kg" + System.lineSeparator()
         + "status: " + this.getStatus() + System.lineSeparator()
         + "idade: " + this.getIdade() + System.lineSeparator();
-    } 
-
-    private int getIdade(){
-        int idade = anoCorrente - this.dataDeNascimento.get(Calendar.YEAR);
-
-        return idade;
     }
 }
