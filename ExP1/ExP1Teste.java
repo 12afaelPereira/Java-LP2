@@ -2,7 +2,7 @@ public class ExP1Teste{
 
     public static void main(String args[]){
         
-        Pessoa pessoa3 = new Pessoa("Rafael");
+        Pessoa pessoa3 = new Pessoa("Gabriel");
         System.out.println(pessoa3.toString());
 
         Pessoa pessoa4 = new Pessoa();
@@ -12,18 +12,11 @@ public class ExP1Teste{
 
         pessoa.setNome("Jose");
         pessoa.setSobreNome("da Silva");
-        pessoa.setDataDeNascimento(15, 8, 1992);
+        pessoa.setDataDeNascimento(15, 8, 1962);
         pessoa.setGenero("Masculino");
         pessoa.setAltura(1.8);
         pessoa.setPeso(60);
 
-        // System.out.println("Nome: " + pessoa.getNome());
-        // System.out.println("Sobrenome: " + pessoa.getSobreNome());
-        // System.out.println("Genero: " + pessoa.getGenero());
-        // System.out.println("Altura: " + pessoa.getAltura() + "m");
-        // System.out.println("Peso: " + pessoa.getPeso() + "kg");
-
-        // System.out.println("Numero de instancias: " + pessoa.getNumeroDeInstancias());
         System.out.println(pessoa.toString());
 
 
@@ -35,8 +28,32 @@ public class ExP1Teste{
         pessoa2.setGenero("Feminino");
         pessoa2.setAltura(1.7);
         pessoa2.setPeso(56);
+        pessoa2.setPai(pessoa);
         System.out.println(pessoa2.toString());
 
+        Pessoa pessoa5 = new Pessoa();
+
+        pessoa5.setNome("Joana");
+        pessoa5.setSobreNome("da Silva");
+        pessoa5.setDataDeNascimento(15, 5, 1999);
+        pessoa5.setGenero("Feminino");
+        pessoa5.setAltura(1.6);
+        pessoa5.setPeso(53);
+        pessoa5.setMae(pessoa2);
+        System.out.println(pessoa5.toString());
+
+        Pessoa pessoa10 = new Pessoa();
+
+        pessoa10.setNome("Lais");
+        pessoa10.setSobreNome("Antunes");
+        pessoa10.setDataDeNascimento(15, 5, 1989);
+        pessoa10.setGenero("Feminino");
+        pessoa10.setAltura(1.6);
+        pessoa10.setPeso(53);
+        System.out.println(pessoa10.toString());
+
+        Pessoa pessoa6 = new Pessoa("Gabriela", "Costa", 1, 2, 2000, "Feminino", 60, 1.67, pessoa, pessoa10);
+        System.out.println(pessoa6.toString());
 
         System.out.println("Numero de instancias: " + pessoa.getNumeroDeInstancias());
     }

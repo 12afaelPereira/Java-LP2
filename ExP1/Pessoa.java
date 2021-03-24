@@ -30,13 +30,15 @@ public class Pessoa{
         numeroDeInstancias++;
     }
 
-    public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, String genero, double peso, double altura){
+    public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, String genero, double peso, double altura, Pessoa pai, Pessoa mae){
         this.setNome(nome);
         this.setSobreNome(sobrenome);
         this.setDataDeNascimento(dia, mes, ano);
         this.setGenero(genero);
         this.setPeso(peso);
         this.setAltura(altura);
+        this.setPai(pai);
+        this.setMae(mae);
 
         numeroDeInstancias++;
     }
@@ -54,7 +56,7 @@ public class Pessoa{
 
     public String getDataDeNascimento(){
         if(dataDeNascimento == null){
-            return "O usuario nao possui data da nascimento preenchida";
+            return "O usuario nao possui data da nascimento cadastrada";
         }
 
         return "" + this.dataDeNascimento.get(Calendar.DATE) 
@@ -74,13 +76,21 @@ public class Pessoa{
         return this.genero;
     }
     
-    // public String getPai(){
-    //     return this.pai.nome;
-    // }
+    public String getPai(){
+        if(pai == null){
+            return "O usuario nao possui um pai cadastrado";
+        }
+
+        return this.pai.nome + " " + this.pai.sobrenome;
+    }
     
-    // public String getMae(){
-    //     return this.mae.nome;
-    // }
+    public String getMae(){
+        if(mae == null){
+            return "O usuario nao possui uma mae cadastrada";
+        }
+
+        return this.mae.nome + " " + this.mae.sobrenome;
+    }
 
 
 
@@ -124,13 +134,13 @@ public class Pessoa{
         }
     }    
 
-    // public void setPai(String nome){
-    //     this.pai.nome = nome;
-    // }
+    public void setPai(Pessoa pai){
+        this.pai = pai;
+    }
 
-    // public void setMae(String nome){
-    //     this.mae.nome = nome;
-    // }
+    public void setMae(Pessoa mae){
+        this.mae = mae;
+    }
 
 
 
@@ -163,6 +173,8 @@ public class Pessoa{
         + "Altura: " + this.getAltura() + "m" + System.lineSeparator()
         + "Peso: " + this.getPeso() + "kg" + System.lineSeparator()
         + "status: " + this.getStatus() + System.lineSeparator()
-        + "idade: " + this.getIdade() + System.lineSeparator();
+        + "Idade: " + this.getIdade() + System.lineSeparator()
+        + "Pai: " + this.getPai() + System.lineSeparator()
+        + "Mae: " + this.getMae() + System.lineSeparator();
     }
 }
