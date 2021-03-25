@@ -145,7 +145,7 @@ public class Pessoa{
 
 
     // *** Metodos especiais ***
-    public int getNumeroDeInstancias(){
+    public static int getNumeroDeInstancias(){
         return numeroDeInstancias;
     }
 

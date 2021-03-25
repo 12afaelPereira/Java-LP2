@@ -55,6 +55,6 @@ public class ExP1Teste{
         Pessoa pessoa6 = new Pessoa("Gabriela", "Costa", 1, 2, 2000, "Feminino", 60, 1.67, pessoa, pessoa10);
         System.out.println(pessoa6.toString());
 
-        System.out.println("Numero de instancias: " + pessoa.getNumeroDeInstancias());
+        System.out.println("Numero de instancias: " + Pessoa.getNumeroDeInstancias());
     }
 }
