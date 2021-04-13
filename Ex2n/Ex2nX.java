@@ -14,7 +14,7 @@ public class Ex2nX{
 
         while(true){
             System.out.println("Entre com um texto ou digite [enter] para sair");
-            entrada = entradaTeclado.nextLine();
+            entrada = entradaTeclado.nextLine().toLowerCase();
             
             if(entrada.equals("")){
                 break;
