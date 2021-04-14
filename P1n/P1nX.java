@@ -4,56 +4,68 @@ public class P1nX{
 
         switch(args.length){
             case 1:
-                float raio = Float.parseFloat(args[0]);
-
-                System.out.println("Area do circulo: " + calcula(raio));
+                try{
+                    double raio = Double.parseDouble(args[0]);
+                    System.out.printf("Area do circulo: %.2f unidades de area\n", calcula(raio));
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Erro, digite apenas numeros");
+                }
             break;
             case 2:
-                float base = Float.parseFloat(args[0]);
-                float altura = Float.parseFloat(args[1]);
-
-                System.out.println("Area do retangulo: " + calcula(base, altura));
+                try{
+                    double base = Double.parseDouble(args[0]);
+                    double altura = Double.parseDouble(args[1]);
+                    System.out.printf("Area do retangulo: %.2f unidades de area\n", calcula(base, altura));
+                }
+                catch(NumberFormatException e){
+                    System.out.println("Erro, digite apenas numeros");
+                }
             break;
             case 3:
-                float lado1 = Float.parseFloat(args[0]);
-                float lado2 = Float.parseFloat(args[1]);
-                float lado3 = Float.parseFloat(args[2]);
+                try{
+                    double lado1 = Double.parseDouble(args[0]);
+                    double lado2 = Double.parseDouble(args[1]);
+                    double lado3 = Double.parseDouble(args[2]);
 
-                if(!isTriangulo(lado1, lado2, lado3)){
-                    System.out.println("Nao e um triangulo");
-                    break;
+                    if(!isTriangulo(lado1, lado2, lado3)){
+                        System.out.println("Nao e um triangulo");
+                        break;
+                    }
+                    else{
+                        System.out.println("O triangulo e: " + verificaTipoDeTriangulo(lado1, lado2, lado3));
+                        System.out.printf("Area do triangulo: %.2f unidades de area\n", calcula(lado1, lado2, lado3));
+                    }
                 }
-                else{
-                    System.out.println("O triangulo e: " + verificaTipoDeTriangulo(lado1, lado2, lado3));
-                    System.out.println("Area do triangulo: " + calcula(lado1, lado2, lado3));
+                catch(NumberFormatException e){
+                    System.out.println("Erro, digite apenas numeros");
                 }
             break;
             default:
                 System.out.println("numero de parametros invalidos");
         }
-
     }
 
-    private static double calcula(float raio){
-        double areaDoCirculo = 0.0;
+    private static double calcula(double raio){
+        double areaDoCirculo = 0;
 
         areaDoCirculo = Math.PI * Math.pow(raio,2);
 
         return areaDoCirculo;
     }
 
-    private static double calcula(float base, float altura){
-        double areaDoRetangulo = 0.0;
+    private static double calcula(double base, double altura){
+        double areaDoRetangulo = 0;
 
         areaDoRetangulo = base * altura;
 
         return areaDoRetangulo;
     }
 
-    private static double calcula(float lado1, float lado2, float lado3){
+    private static double calcula(double lado1, double lado2, double lado3){
 
         String triangulo = verificaTipoDeTriangulo(lado1, lado2, lado3);
-        double areaDoTriangulo = 0.0;
+        double areaDoTriangulo = 0;
         double altura = 0;
         double semiperimetro = 0;
 
@@ -84,14 +96,14 @@ public class P1nX{
         return areaDoTriangulo;
     }
     
-    public static boolean isTriangulo(float lado1, float lado2, float lado3){
+    private static boolean isTriangulo(double lado1, double lado2, double lado3){
         
         return ((lado1 + lado2) <= lado3? false :
-                    (lado2 + lado3) <= lado1? false :
+                    (lado1 + lado3) <= lado2? false :
                     (lado2 + lado3) <= lado1? false : true);
     }
 
-    public static String verificaTipoDeTriangulo(float lado1, float lado2, float lado3){
+    private static String verificaTipoDeTriangulo(double lado1, double lado2, double lado3){
         if((lado1 == lado2) && (lado2 == lado3)){
             return "equilatero";
         }
@@ -102,5 +114,7 @@ public class P1nX{
             return "isosceles";
         }
     }
+
+    
 
 }
