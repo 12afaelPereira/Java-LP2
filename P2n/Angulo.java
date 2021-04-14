@@ -32,9 +32,15 @@ public class Angulo{
     }
 
     public String toString(double angulo){
-        return "Seno: " + fSeno(angulo) + System.lineSeparator()
+        return "Angulo em grau: " + angulo + System.lineSeparator()
+        + "Angulo em rad: " + String.format("%.2f",cvtAngulo(angulo)) + System.lineSeparator()
+        + "Seno: " + fSeno(angulo) + System.lineSeparator()
+        + "Seno: " + String.format("%.2f",fSeno(angulo)) + System.lineSeparator()
         + "Cosseno: " + fCos(angulo) + System.lineSeparator()
-        + "Tangente: " + fCos(angulo) + System.lineSeparator()
-        + "Cotangente: " + fCotangente(angulo) + System.lineSeparator();
+        + "Cosseno: " + String.format("%.2f",fCos(angulo)) + System.lineSeparator()
+        + "Tangente: " + fTangente(angulo) + System.lineSeparator()
+        + "Tangente: " + String.format("%.2f",fTangente(angulo)) + System.lineSeparator()
+        + "Cotangente: " + fCotangente(angulo) + System.lineSeparator()
+        + "Cotangente: " + String.format("%.2f",fCotangente(angulo)) + System.lineSeparator();
     }
 }

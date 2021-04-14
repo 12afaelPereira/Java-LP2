@@ -15,6 +15,10 @@ public class P2nX{
             calculos = new Angulo();
             System.out.println(calculos.toString(angulo));
         }
+        else if(args.length > 1){
+            System.out.println("Numero de argumentos invalido");
+        }
+        
 
         while(true){
             System.out.println("Digite uma medida em graus do angulo ou [enter] para sair");
@@ -24,9 +28,14 @@ public class P2nX{
                 break;
             }
 
-            angulo = Double.parseDouble(entrada);
-            calculos = new Angulo();
-            System.out.println(calculos.toString(angulo));
+            try{
+                angulo = Double.parseDouble(entrada);
+                calculos = new Angulo();
+                System.out.println(calculos.toString(angulo));
+            }
+            catch(NumberFormatException e){
+                System.out.println("Erro. Digite apenas numeros");
+            }
         }
     }
 }
