@@ -7,13 +7,16 @@ public class P2nX{
         Scanner entradaTeclado = new Scanner(System.in);
         String entrada = "";
         double angulo = 0;
-        Angulo calculos = null;
         
         if(args.length == 1){
-            angulo = Double.parseDouble(args[0]);
-            
-            calculos = new Angulo();
-            System.out.println(calculos.toString(angulo));
+            try{
+                angulo = Double.parseDouble(args[0]);
+                System.out.println(imprimeResultado(angulo));
+            }
+            catch(NumberFormatException e){
+                System.out.println("Erro. Digite apenas numeros");
+            }
+
         }
         else if(args.length > 1){
             System.out.println("Numero de argumentos invalido");
@@ -30,12 +33,20 @@ public class P2nX{
 
             try{
                 angulo = Double.parseDouble(entrada);
-                calculos = new Angulo();
-                System.out.println(calculos.toString(angulo));
+
+                System.out.println(imprimeResultado(angulo));
             }
             catch(NumberFormatException e){
                 System.out.println("Erro. Digite apenas numeros");
             }
         }
+    }
+
+    private static String imprimeResultado(double angulo){
+
+        return "Seno: " + String.format("%.2f", Angulo.fSeno(angulo)) + System.lineSeparator()
+        + "Cosseno: " + String.format("%.2f", Angulo.fCos(angulo)) + System.lineSeparator()
+        + "Tangente: " + String.format("%.2f", Angulo.fTangente(angulo)) + System.lineSeparator()
+        + "Cotangente: " + String.format("%.2f", Angulo.fCotangente(angulo)) + System.lineSeparator(); 
     }
 }
