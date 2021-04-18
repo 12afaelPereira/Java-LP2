@@ -20,6 +20,23 @@ public class Funcionario{
         return (this.salario - calculoDoDesconto);
     }
 
+    // Getters
+    public String getNome(){
+        return this.nome;
+    }
+
+    public String getCodigoFuncionario(){
+        return this.codigoFuncionario;
+    }
+
+    public float getSalario(){
+        return this.salario;
+    }
+
+    public float getSalarioLiquido(){
+        return this.salarioLiquido;
+    }
+
     @Override
     public String toString(){
         return "Nome: " + this.nome + System.lineSeparator()

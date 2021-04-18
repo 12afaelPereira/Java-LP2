@@ -6,7 +6,7 @@ public class P4nX{
 
         FuncCntrd subFunc = new FuncCntrd("Rafael", "007", 5000, 3);
 
-        subFunc.calculaSalario(3);
+        subFunc.calculaSalario();
         System.out.println(subFunc.toString());
     }
 }
