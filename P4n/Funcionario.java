@@ -2,22 +2,24 @@ public class Funcionario{
 
     protected String nome = "";
     protected String codigoFuncionario = "";
-    protected float salario = 0;
+    protected float salarioBase = 0;
     protected float salarioLiquido = 0;
 
 
-    public Funcionario(String nome, String codigoFuncionario, float salario){
+    public Funcionario(String nome, String codigoFuncionario, float salarioBase){
         this.nome = nome;
         this.codigoFuncionario = codigoFuncionario;
-        this.salarioLiquido = salario;
-        this.salario = salario;
+        this.salarioLiquido = salarioBase;
+        this.salarioBase = salarioBase;
     }
 
 
     public double calculaSalario(double desconto){
-        double calculoDoDesconto = this.salario * desconto;
+        double calculoDoDesconto = this.salarioBase * desconto;
+        
+        this.salarioLiquido = (float)(this.salarioBase - calculoDoDesconto);
 
-        return (this.salario - calculoDoDesconto);
+        return salarioLiquido;
     }
 
     // Getters
@@ -30,7 +32,7 @@ public class Funcionario{
     }
 
     public float getSalario(){
-        return this.salario;
+        return this.salarioBase;
     }
 
     public float getSalarioLiquido(){
@@ -41,6 +43,6 @@ public class Funcionario{
     public String toString(){
         return "Nome: " + this.nome + System.lineSeparator()
         + "Codigo: " + this.codigoFuncionario + System.lineSeparator()
-        + "Salario-base: " + String.format("%.2f unidades monetarias", calculaSalario(10)) + System.lineSeparator();
+        + "Salario-base: " + String.format("%.2f unidades monetarias", this.salarioBase) + System.lineSeparator();
     }
 }
