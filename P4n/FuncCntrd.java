@@ -43,7 +43,7 @@ public class FuncCntrd extends Funcionario{
 
     @Override
     public String toString(){
-        return super.toString() + System.lineSeparator()
+        return super.toString()
         + "Salario-liquido: " + String.format("%.2f unidades monetarias", this.salarioLiquido) + System.lineSeparator();
         
         // "Nome: " + super.nome + System.lineSeparator()

@@ -2,12 +2,13 @@ public class FuncionarioExct extends FuncCntrd{
 
     private float gratificacao = 0;
 
-    public FuncionarioExct(String nome, String codigoFuncionario, float salarioBase, int numeroDeDeDependentes, float gratificacao){
-        super(nome, codigoFuncionario, salarioBase, numeroDeDeDependentes);
+    public FuncionarioExct(String nome, String codigoFuncionario, float salarioBase, int numeroDeDependentes, float gratificacao){
+        super(nome, codigoFuncionario, salarioBase, numeroDeDependentes);
 
         this.gratificacao = gratificacao;
     }
 
+    @Override
     public void calculaSalario(){
         this.salarioLiquido += this.gratificacao;
     }
@@ -19,7 +20,7 @@ public class FuncionarioExct extends FuncCntrd{
 
     @Override
     public String toString(){
-        return super.toString() + System.lineSeparator()
+        return super.toString()
         + "Gratificacao: " + String.format("%.2f unidades monetarias", this.gratificacao) + System.lineSeparator();
         
         // "Nome: " + super.nome + System.lineSeparator()
