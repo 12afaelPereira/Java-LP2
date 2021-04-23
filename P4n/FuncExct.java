@@ -23,6 +23,6 @@ public class FuncExct extends FuncCntrd{
     @Override
     public String toString(){
         return super.toString()
-        + "Gratificacao: " + String.format("%.2f unidades monetarias", this.gratificacao) + System.lineSeparator();
+        + "Gratificacao: " + String.format("%.2f ", this.gratificacao) + System.lineSeparator();
     }
 }

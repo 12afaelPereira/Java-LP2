@@ -48,12 +48,7 @@ public class FuncCntrd extends Funcionario{
     @Override
     public String toString(){
         return super.toString()
-        + "Salario-liquido: " + String.format("%.2f unidades monetarias", this.salarioLiquido) + System.lineSeparator();
-        
-        // "Nome: " + super.nome + System.lineSeparator()
-        // + "Codigo: " + super.codigoFuncionario + System.lineSeparator()
-        // + "Salario-base: " + String.format("%.2f unidades monetarias", this.salarioBase) + System.lineSeparator()
-        // + "Salario-liquido: " + String.format("%.2f unidades monetarias", this.salarioLiquido) + System.lineSeparator();
+        + "Salario-liquido: " + String.format("%.2f ", this.salarioLiquido) + System.lineSeparator();
     }
 
 }
