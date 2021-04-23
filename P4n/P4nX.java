@@ -22,6 +22,10 @@ public class P4nX{
         for(int i=0; i<numeroDeFuncionarios; i++){
             entDados();
         }
+
+        for(int i=0; i<numeroDeFuncionarios; i++){
+            geraFolha();
+        }
     }
 
     public static void entDados(){
@@ -29,6 +33,7 @@ public class P4nX{
         String nome = "";
         String codigoFuncionario = "";
         float salario = 0;
+        float gratificacao = 0;
         int numeroDeDependentes = 0;
 
 
@@ -40,23 +45,43 @@ public class P4nX{
 
         if(tipoDeFuncionario.equals("c")){
             System.out.println("Nome do Funcionario ");
+            nome = entrada.nextLine();
+    
             System.out.println("Codigo: ");
+            codigoFuncionario = entrada.nextLine();
+
             System.out.println("Salario");
+            salario = Float.parseFloat(entrada.nextLine());
+
             System.out.println("Numero de dependentes: ");
+            numeroDeDependentes = Integer.parseInt(entrada.nextLine());
 
             funcionarios.add(new FuncCntrd(nome, codigoFuncionario, salario, numeroDeDependentes));
+        }
+        else{
+            System.out.println("Nome do Funcionario ");
+            nome = entrada.nextLine();
+    
+            System.out.println("Codigo: ");
+            codigoFuncionario = entrada.nextLine();
+
+            System.out.println("Salario");
+            salario = Float.parseFloat(entrada.nextLine());
+
+            System.out.println("Numero de dependentes: ");
+            numeroDeDependentes = Integer.parseInt(entrada.nextLine());
+
+            System.out.println("Gratificacao: ");
+            gratificacao = Float.parseFloat(entrada.nextLine());
+
+            funcionarios.add(new FuncExct(nome, codigoFuncionario, salario, numeroDeDependentes, gratificacao));
         }
 
 
     }
 
-    public String geraFolha(){
+    public static String geraFolha(){
         return "Hello";
     }
-
-
-    // public void calculaSalarios(){
-
-    // }
 }
 
