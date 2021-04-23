@@ -1,0 +1,28 @@
+public class FuncExct extends FuncCntrd{
+
+    private float gratificacao = 0;
+
+    public FuncExct(String nome, String codigoFuncionario, float salario, int numeroDeDependentes, float gratificacao){
+        super(nome, codigoFuncionario, salario, numeroDeDependentes);
+
+        this.gratificacao = gratificacao;
+    }
+
+    
+    public float calculaSalario(){
+        this.salarioLiquido = super.calculaSalario(ALIQUOTA) + this.gratificacao;
+        
+        return salarioLiquido;
+    }
+
+    // Getters
+    public float getGratificacao(){
+        return this.gratificacao;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString()
+        + "Gratificacao: " + String.format("%.2f unidades monetarias", this.gratificacao) + System.lineSeparator();
+    }
+}

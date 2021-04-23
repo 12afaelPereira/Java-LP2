@@ -2,26 +2,30 @@ public class FuncCntrd extends Funcionario{
     
     protected int numeroDeDependentes = 0;
     protected float salarioFamilia = 0;
-    protected final double VALOR_POR_DEP = 9.58;
-    protected final double ALIQUOTA = 0.15;
+    protected float salarioBase = 0;
+    protected final float VALOR_POR_DEP = (float) 9.58;
+    protected final float ALIQUOTA = (float) 0.15;
 
 
-    public FuncCntrd(String nome, String codigoFuncionario, float salarioBase, int numeroDeDependentes){
-        super(nome, codigoFuncionario, salarioBase);
+    public FuncCntrd(String nome, String codigoFuncionario, float salario, int numeroDeDependentes){
+        super(nome, codigoFuncionario, salario);
         
         this.numeroDeDependentes = numeroDeDependentes;
     }
 
-    public void calculaSalario(){
-        super.calculaSalario(ALIQUOTA);
-        // float desconto = (float)(this.salarioBase * this.ALIQUOTA);
-        // this.salarioLiquido =  this.salarioLiquido - desconto;
+    public float calculaSalario(){
+        this.salarioLiquido = super.calculaSalario(ALIQUOTA);
+        
+        return salarioLiquido;
     }
 
-    public void calculaSalario(int numeroDeDependentes){
-        this.salarioFamilia = (float)(numeroDeDependentes * VALOR_POR_DEP);
-        this.salarioLiquido += salarioFamilia;
-        this.calculaSalario();
+    public float calculaSalario(int numeroDeDependentes){
+        this.salarioFamilia = (numeroDeDependentes * VALOR_POR_DEP);
+        this.salarioBase = this.salario + salarioFamilia;
+
+        this.salarioLiquido = this.calculaSalario();
+
+        return salarioLiquido;
     }
 
     // Getters
