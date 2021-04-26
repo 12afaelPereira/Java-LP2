@@ -22,10 +22,10 @@ public class P4nX{
 
     public static void main(String args[]){
 
-        P4nX instanciaDeClasse = new P4nX(numeroDeFuncionarios);
-
         System.out.println("Quantos funcionarios? ");
         numeroDeFuncionarios = Integer.parseInt(entrada.nextLine());
+        
+        P4nX instanciaDeClasse = new P4nX(numeroDeFuncionarios);
 
         System.out.println("--- Cadastro de Funcionarios");
 
