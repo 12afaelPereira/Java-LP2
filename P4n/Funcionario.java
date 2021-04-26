@@ -1,6 +1,6 @@
 public class Funcionario{
 
-    protected String nome = "";
+    public String nome = "";
     protected String codigoFuncionario = "";
     protected float salario = 0;
     protected float salarioLiquido = 0;
@@ -41,8 +41,9 @@ public class Funcionario{
 
     @Override
     public String toString(){
-        return "Nome: " + this.nome + System.lineSeparator()
-        + "Codigo: " + this.codigoFuncionario + System.lineSeparator()
-        + "Salario-liquido: " + String.format("%.2f ", this.salarioLiquido) + System.lineSeparator();
+        return "Nome: " + this.getNome() + System.lineSeparator()
+        + "Codigo: " + this.getCodigoFuncionario() + System.lineSeparator()
+        + "Salario: " + String.format("%.2f ", this.salario) + System.lineSeparator();
+        // + "Salario-liquido: " + String.format("%.2f ", this.salarioLiquido) + System.lineSeparator();
     }
 }

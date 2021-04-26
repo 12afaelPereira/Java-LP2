@@ -63,7 +63,8 @@ public class P4nX{
 
     public static void geraFolha(){
 
-        funcionarios.forEach( (funcionario) -> System.out.println(funcionario) );
+         funcionarios.forEach( (funcionario) -> System.out.println(funcionario) );
+
     }
 
     public static void criaFuncionarioContratado(){
