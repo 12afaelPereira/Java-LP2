@@ -12,6 +12,6 @@ public class Pessoa{
     @Override
     public String toString(){
         return "Nome: <" + nome + ">" + System.lineSeparator()
-            +  "Data de Nascimento: <" + dataDeNascimento + ">";
+            +  "Data de Nascimento: <" + dataDeNascimento + ">" + System.lineSeparator();
     }
 }

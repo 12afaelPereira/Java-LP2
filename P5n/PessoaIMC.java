@@ -23,4 +23,14 @@ public abstract class PessoaIMC extends Pessoa{
 
         return indiceDeMassaCorporal;
     }
+
+    public abstract String resultIMC();
+
+    @Override
+    public String toString(){
+
+        return super.toString()
+            + "Peso: <" + peso + ">" +  System.lineSeparator()
+            + "Altura: <" + altura + ">" + System.lineSeparator();
+    }
 }
