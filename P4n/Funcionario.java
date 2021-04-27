@@ -1,6 +1,6 @@
 public class Funcionario{
 
-    public String nome = "";
+    protected String nome = "";
     protected String codigoFuncionario = "";
     protected float salario = 0;
     protected float salarioLiquido = 0;

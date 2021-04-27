@@ -37,6 +37,10 @@ public class FuncCntrd extends Funcionario{
         return this.salarioFamilia;
     }
 
+    public float getSalarioBase(){
+        return this.salarioBase;
+    }
+
     public double getValorPorDep(){
         return this.VALOR_POR_DEP;
     }
@@ -48,8 +52,8 @@ public class FuncCntrd extends Funcionario{
     @Override
     public String toString(){
         return super.toString()
-            + "Salario-Liquido: " + String.format("%.2f ", this.calculaSalario(this.numeroDeDependentes)) + System.lineSeparator()
-            + "Salario-Base: " + String.format("%.2f ", this.salarioBase) + System.lineSeparator();
+            + "Salario-Liquido: " + String.format("%.2f ", this.calculaSalario(this.getNumeroDeDependentes())) + System.lineSeparator()
+            + "Salario-Base: " + String.format("%.2f ", this.getSalarioBase()) + System.lineSeparator();
     }
 
 }

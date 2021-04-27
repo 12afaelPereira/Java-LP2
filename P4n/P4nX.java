@@ -25,7 +25,13 @@ public class P4nX{
     public static void main(String args[]){
 
         System.out.println("Quantos funcionarios? ");
-        numeroDeFuncionarios = Integer.parseInt(entrada.nextLine());
+
+        try{
+            numeroDeFuncionarios = Integer.parseInt(entrada.nextLine());
+        }
+        catch(NumberFormatException e){
+            System.out.println("Erro. Digite apenas numeros");
+        }
         
         P4nX instanciaDeClasse = new P4nX(numeroDeFuncionarios);
 
@@ -77,17 +83,35 @@ public class P4nX{
             codigoFuncionario = entrada.nextLine();
 
             System.out.print("Salario: ");
-            salario = Float.parseFloat(entrada.nextLine());
+            try{
+                salario = Float.parseFloat(entrada.nextLine());
+            }
+            catch(NumberFormatException e){
+                System.out.println("Erro. Digite apenas numeros");
+                System.exit(1);
+            }
 
             System.out.print("Numero de dependentes: ");
-            numeroDeDependentes = Integer.parseInt(entrada.nextLine());
+            try{
+                numeroDeDependentes = Integer.parseInt(entrada.nextLine());
+            }
+            catch(NumberFormatException e){
+                System.out.println("Erro. Digite apenas numeros");
+                System.exit(1);
+            }
     }
 
     public static void criaFuncionarioExecutivo(){
         criaFuncionarioContratado();
 
         System.out.print("Gratificacao: ");
-        gratificacao = Float.parseFloat(entrada.nextLine());
+        try{
+            gratificacao = Float.parseFloat(entrada.nextLine());
+        }
+        catch(NumberFormatException e){
+            System.out.println("Erro. Digite apenas numeros");
+            System.exit(1);
+        }
     }
 }
 
