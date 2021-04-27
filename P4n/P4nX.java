@@ -5,7 +5,7 @@ public class P4nX{
 
     public static int numeroDeFuncionarios = 0;
     public static Scanner entrada = new Scanner(System.in);
-    public static ArrayList funcionarios = new ArrayList();
+    public static ArrayList funcionarios;
 
     public static String tipoDeFuncionario = "";
     public static String nome = "";
@@ -18,6 +18,8 @@ public class P4nX{
 
     public P4nX(int numeroDeFuncionarios){
         this.numeroDeFuncionarios = numeroDeFuncionarios;
+
+        funcionarios = new ArrayList(numeroDeFuncionarios);
     }
 
     public static void main(String args[]){

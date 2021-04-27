@@ -43,7 +43,6 @@ public class Funcionario{
     public String toString(){
         return "Nome: " + this.getNome() + System.lineSeparator()
         + "Codigo: " + this.getCodigoFuncionario() + System.lineSeparator()
-        + "Salario: " + String.format("%.2f ", this.salario) + System.lineSeparator();
-        // + "Salario-liquido: " + String.format("%.2f ", this.salarioLiquido) + System.lineSeparator();
+        + "Salario: " + String.format("%.2f ", this.getSalario()) + System.lineSeparator();
     }
 }

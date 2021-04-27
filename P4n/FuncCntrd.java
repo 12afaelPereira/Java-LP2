@@ -15,7 +15,7 @@ public class FuncCntrd extends Funcionario{
 
     public float calculaSalario(){
         this.salarioLiquido = super.calculaSalario(ALIQUOTA);
-        
+
         return salarioLiquido;
     }
 
@@ -48,7 +48,8 @@ public class FuncCntrd extends Funcionario{
     @Override
     public String toString(){
         return super.toString()
-        + "Salario-liquido: " + String.format("%.2f ", this.calculaSalario(this.numeroDeDependentes)) + System.lineSeparator();
+            + "Salario-Liquido: " + String.format("%.2f ", this.calculaSalario(this.numeroDeDependentes)) + System.lineSeparator()
+            + "Salario-Base: " + String.format("%.2f ", this.salarioBase) + System.lineSeparator();
     }
 
 }

@@ -23,7 +23,6 @@ public class FuncExct extends FuncCntrd{
     @Override
     public String toString(){
         return super.toString()
-        // + "Salario-liquido: " + String.format("%.2f ", this.calculaSalario()) + System.lineSeparator()
         + "Gratificacao: " + String.format("%.2f ", this.gratificacao) + System.lineSeparator();
     }
 }
