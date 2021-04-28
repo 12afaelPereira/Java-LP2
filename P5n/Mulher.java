@@ -11,6 +11,6 @@ public class Mulher extends PessoaIMC{
     @Override
     public String toString(){
         return super.toString()
-         + "indice De Massa Corporal: " + this.resultIMC() + " " + super.classificacaoMulher(this.resultIMC());
+         + "Indice De Massa Corporea: " + this.resultIMC() + " " + super.classificacaoMulher(this.resultIMC());
     }
 }
