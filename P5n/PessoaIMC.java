@@ -18,10 +18,24 @@ public abstract class PessoaIMC extends Pessoa{
         return this.altura;
     }
 
-    public double CalculaIMC(double peso, double altura){
+    public double calculaIMC(double peso, double altura){
         double indiceDeMassaCorporal = peso/Math.pow(altura, 2);
 
         return indiceDeMassaCorporal;
+    }
+
+    public String classificacaoHomem(String indiceDeMassaCorporal){
+        double imc = Double.parseDouble(indiceDeMassaCorporal);
+
+        return imc < 20.7? "Abaixo do peso ideal" : 
+            imc >26.4? "Acima do peso ideal" : "Peso ideal";
+    }
+
+    public String classificacaoMulher(String indiceDeMassaCorporal){
+        double imc = Double.parseDouble(indiceDeMassaCorporal);
+
+        return imc < 19? "Abaixo do peso ideal" : 
+            imc >25.8? "Acima do peso ideal" : "Peso ideal";
     }
 
     public abstract String resultIMC();

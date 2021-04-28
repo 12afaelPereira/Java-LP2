@@ -2,8 +2,12 @@
 
         public static void main(String[] args){
 
-            Pessoa rafael = new Pessoa("Rafael", "15/08/1992");
+            Homem rafael = new Homem("Rafael", "15/08/1992", 150, 1.80);
 
             System.out.println(rafael.toString());
+
+            Homem maria = new Homem("maria", "12/07/1995", 57, 1.65);
+
+            System.out.println(maria.toString());
         }
     }
