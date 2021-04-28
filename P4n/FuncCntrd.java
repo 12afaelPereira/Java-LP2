@@ -41,11 +41,11 @@ public class FuncCntrd extends Funcionario{
         return this.salarioBase;
     }
 
-    public double getValorPorDep(){
+    public float getValorPorDep(){
         return this.VALOR_POR_DEP;
     }
 
-    public double getAliquota(){
+    public float getAliquota(){
         return this.ALIQUOTA;
     }
 

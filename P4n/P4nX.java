@@ -13,7 +13,6 @@ public class P4nX{
     public static float salario = 0;
     public static float gratificacao = 0;
     public static int numeroDeDependentes = 0;
-    public static int numeroEspecial = 0;
 
 
     public P4nX(int numeroDeFuncionarios){
