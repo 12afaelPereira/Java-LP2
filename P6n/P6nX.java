@@ -8,13 +8,11 @@ import java.util.Scanner;
         public static String opcaoDoMenu = "";
         public static String modoDeOrdenacao = "";
         public static String genero = "";
-        // public static ArrayList pessoas = new ArrayList();
         public static String nome = "";
         public static String dataDeNascimento = "";
         public static String peso = "";
         public static String altura = "";
         public static MinhaListaOrdenavel listaOrdenavel = new MinhaListaOrdenavel();
-        // public static MinhaListaOrdenavel listaOrdenavel;
 
         public static void main(String[] args){
             
@@ -35,7 +33,6 @@ import java.util.Scanner;
                 System.lineSeparator();
             }
 
-            // imprimeDados();
             menu();
             System.out.println("Minha lista ordenada...");
             System.out.println(listaOrdenavel.toString());
@@ -87,14 +84,6 @@ import java.util.Scanner;
                 listaOrdenavel.add(new Mulher(nome, dataDeNascimento, Double.parseDouble(peso), Double.parseDouble(altura)));
             }
         }
-
-        // public static void imprimeDados(){
-        //     pessoas.forEach( (pessoa) -> {
-        //         System.out.println("--------");
-        //         System.out.println(pessoa);
-        //         System.out.println("--------");
-        //     });
-        // }
 
         public static void menu(){
             opcaoDoMenu = "";
