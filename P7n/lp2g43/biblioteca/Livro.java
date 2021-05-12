@@ -1,6 +1,8 @@
 package lp243.biblioteca;
 
 import java.util.ArrayList;
+import lp243.biblioteca.CopiaNaoDisponivelEx;
+import lp243.biblioteca.NenhumaCopiaEmprestadaEx;
 
 public class Livro{
 
@@ -26,13 +28,24 @@ public class Livro{
     }
 
 
-    // protected void empresta(){
+    protected void empresta(){
+        if(emprestados == quantidade){
+            throw new CopiaNaoDisponivelEx("Todas as copias estao emprestadas");
+        }
+        else{
+            emprestados++;
+        }
+    }
 
-    // }
+    protected void devolve(){
 
-    // protected void devolve(){
-
-    // }
+        if(emprestados == 0){
+            throw new NenhumaCopiaEmprestadaEx("Nenhuma copia emprestada ainda");
+        }
+        else{
+            emprestados--;
+        }
+    }
 
     
 
