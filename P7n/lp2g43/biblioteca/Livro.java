@@ -1,0 +1,40 @@
+package lp243.biblioteca;
+
+import java.util.ArrayList;
+
+public class Livro{
+
+    // *** Atributos ***
+    protected String codigoDoLivro = "";
+    protected String titulo = "";
+    protected String categoria = "";
+    protected int quantidade = 0;
+    protected int emprestados = 0;
+    protected ArrayList historico = new ArrayList();
+
+
+    public Livro(String codigoDoLivro, String titulo, String categoria, int quantidade, int emprestados){
+        this.codigoDoLivro = codigoDoLivro;
+        this.titulo = titulo;
+        this.categoria = categoria;
+        this.quantidade = quantidade;
+        this.emprestados = emprestados;
+    }
+
+    public Livro(String titulo){
+        this.titulo = titulo;
+    }
+
+
+    // protected void empresta(){
+
+    // }
+
+    // protected void devolve(){
+
+    // }
+
+    
+
+
+}
