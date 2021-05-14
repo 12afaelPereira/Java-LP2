@@ -45,4 +45,6 @@ public class Biblioteca{
     // public Livro getLivro(String codigoDoLivro){
     // }
 
+    // public Livro getUsuario(int codigoDoUsuario){
+    // }
 }
