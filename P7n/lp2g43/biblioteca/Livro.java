@@ -47,7 +47,13 @@ public class Livro{
         }
     }
 
-    
+    public void addUsuarioHist(int diaDoEmprestimo, int mesDoEmprestimo, int anoDoEmprestimo, 
+                      int diaDaDevolucao, int mesDaDevolucao, int anoDaDevolucao,
+                      int codigoDoUsuario){
+        
+        historico.add(new EmprestadoPara(diaDoEmprestimo, mesDoEmprestimo, anoDoEmprestimo,
+                                        diaDaDevolucao, mesDaDevolucao, anoDaDevolucao, codigoDoUsuario));
 
+    }
 
 }
