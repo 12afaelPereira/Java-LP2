@@ -12,7 +12,7 @@ public class Livro{
     protected String categoria = "";
     protected int quantidade = 0;
     protected int emprestados = 0;
-    protected ArrayList historico = new ArrayList();
+    protected ArrayList<EmprestadoPara> historico = new ArrayList<EmprestadoPara>();
 
 
     public Livro(String codigoDoLivro, String titulo, String categoria, int quantidade, int emprestados){

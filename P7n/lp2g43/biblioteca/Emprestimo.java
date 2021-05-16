@@ -8,12 +8,12 @@ public class Emprestimo{
     // *** Atributos ***
     protected GregorianCalendar dataDoEmprestimo = null;
     protected GregorianCalendar dataDeDevolucao = null;
-    protected int codigoDoLivro = 0;
+    protected String codigoDoLivro = "";
 
 
     public Emprestimo(int diaDoEmprestimo, int mesDoEmprestimo, int anoDoEmprestimo, 
                       int diaDaDevolucao, int mesDaDevolucao, int anoDaDevolucao,
-                      int codigoDoLivro){
+                      String codigoDoLivro){
 
         this.setDataDoEmprestimo(diaDoEmprestimo, mesDoEmprestimo, anoDoEmprestimo);
         this.setDataDaDevolucao(diaDaDevolucao, mesDaDevolucao, anoDaDevolucao);

@@ -9,10 +9,10 @@ public class Usuario extends Pessoa{
     // *** Atributos ***
     protected String endereco = "";
     protected int codigoUsuario = 0;
-    protected ArrayList historico = new ArrayList();
+    protected ArrayList<Emprestimo> historico = new ArrayList<Emprestimo>();
 
 
-    public Usuario(String nome, int dia, int mes, int ano, String endereco, int codigoUsuario, ArrayList historico){
+    public Usuario(String nome, int dia, int mes, int ano, String endereco, int codigoUsuario, ArrayList<Emprestimo> historico){
         super(nome, dia, mes, ano);
 
         this.endereco = endereco;
@@ -26,7 +26,7 @@ public class Usuario extends Pessoa{
                       int diaDaDevolucao, 
                       int mesDaDevolucao, 
                       int anoDaDevolucao,
-                      int codigoDoLivro){
+                      String codigoDoLivro){
 
         historico.add(new Emprestimo(diaDoEmprestimo, mesDoEmprestimo, anoDoEmprestimo, 
                                     diaDaDevolucao, mesDaDevolucao, anoDaDevolucao, codigoDoLivro));
