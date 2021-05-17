@@ -1,8 +1,8 @@
 package lp2g43.biblioteca;
 
 import java.util.ArrayList;
-import lp2g43.biblioteca.CopiaNaoDisponivelEx;
-import lp2g43.biblioteca.NenhumaCopiaEmprestadaEx;
+//import lp2g43.biblioteca.CopiaNaoDisponivelEx;
+//import lp2g43.biblioteca.NenhumaCopiaEmprestadaEx;
 
 public class Livro{
 
@@ -45,6 +45,10 @@ public class Livro{
         else{
             emprestados--;
         }
+    }
+
+    public String getCodigoLivro(){
+        return this.codigoDoLivro;
     }
 
     public void addUsuarioHist(int diaDoEmprestimo, int mesDoEmprestimo, int anoDoEmprestimo, 

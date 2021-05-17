@@ -1,6 +1,5 @@
 package lp2g43.biblioteca;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Emprestimo{
