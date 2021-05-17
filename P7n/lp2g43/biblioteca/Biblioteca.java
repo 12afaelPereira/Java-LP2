@@ -1,22 +1,33 @@
-package lp243.biblioteca;
+package lp2g43.biblioteca;
 
 import java.util.Hashtable;
-import lp243.biblioteca.Livro;
+import lp2g43.biblioteca.Livro;
+import lp2g43.biblioteca.Usuario;
+import lp2g43.biblioteca.*;
 
 public class Biblioteca{
 
-    protected Hashtable cadastroDeUsuarios = null;
-    protected Hashtable cadastroDelivros = null;
+    protected Hashtable<Integer, Integer> cadastroDeUsuarios = null;
+    protected Hashtable<String, Integer> cadastroDelivros = null;
+    protected Usuario usuario = null;
 
-    public Biblioteca(Hashtable cadastroDeUsuarios, Hashtable cadastroDelivros){
+    public Biblioteca(Hashtable<Integer, Integer> cadastroDeUsuarios, Hashtable<String, Integer> cadastroDelivros){
 
         this.cadastroDeUsuarios = cadastroDeUsuarios;
         this.cadastroDelivros = cadastroDelivros;
-
     }
 
+    // public Biblioteca(String cadastroDeUsuarios, String cadastroDelivros){
 
-    public void cadastraUsuario(){
+    //     this.cadastroDeUsuarios = cadastroDeUsuarios;
+    //     this.cadastroDelivros = cadastroDelivros;
+    // }
+
+
+    public void cadastraUsuario(Usuario usuario){
+        // this.usuario = usuario;
+
+        cadastroDeUsuarios.put(1, usuario.getCodigoUsuario());
     }
 
     public void cadastraLivro(){

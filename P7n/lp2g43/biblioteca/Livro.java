@@ -1,8 +1,8 @@
-package lp243.biblioteca;
+package lp2g43.biblioteca;
 
 import java.util.ArrayList;
-import lp243.biblioteca.CopiaNaoDisponivelEx;
-import lp243.biblioteca.NenhumaCopiaEmprestadaEx;
+import lp2g43.biblioteca.CopiaNaoDisponivelEx;
+import lp2g43.biblioteca.NenhumaCopiaEmprestadaEx;
 
 public class Livro{
 

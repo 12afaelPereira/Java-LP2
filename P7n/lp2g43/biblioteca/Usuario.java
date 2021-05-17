@@ -1,7 +1,5 @@
-package lp243.biblioteca;
+package lp2g43.biblioteca;
 
-import lp243.biblioteca.Pessoa;
-import lp243.biblioteca.Emprestimo;
 import java.util.ArrayList;
 
 public class Usuario extends Pessoa{
@@ -18,6 +16,10 @@ public class Usuario extends Pessoa{
         this.endereco = endereco;
         this.codigoUsuario = codigoUsuario;
         this.historico = historico;
+    }
+
+    public int getCodigoUsuario(){
+        return this.codigoUsuario;
     }
 
     public void addLivroHist(int diaDoEmprestimo, 

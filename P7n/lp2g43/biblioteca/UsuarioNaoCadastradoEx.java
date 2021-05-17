@@ -1,4 +1,4 @@
-package lp243.biblioteca;
+package lp2g43.biblioteca;
 
 public class UsuarioNaoCadastradoEx extends RuntimeException{
 
