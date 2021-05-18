@@ -5,19 +5,17 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-//import lp2g43.biblioteca.Livro;
-//import lp2g43.biblioteca.Usuario;
-//import lp2g43.biblioteca.*;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 import java.io.IOException;
 
 public class Biblioteca{
 
     protected Hashtable<Integer, Usuario> cadastroDeUsuarios = null;
     protected Hashtable<String, Livro> cadastroDelivros = null;
-    protected File arquivoCriado = null;
-    protected FileWriter arquivoEscrito = null;
     protected ArrayList<String> livrosOrdenados = new ArrayList<String>();
     protected ArrayList<String> usuariosOrdenados = new ArrayList<String>();
 
@@ -47,28 +45,32 @@ public class Biblioteca{
 
     public void salvaArquivo(Hashtable cadastro, String nomeDoArquivo){
         try{
-            arquivoCriado = new File(nomeDoArquivo);
+            FileOutputStream streamDoArquivo = new FileOutputStream("./files" + nomeDoArquivo);
+            ObjectOutputStream arquivo = new ObjectOutputStream(streamDoArquivo);
 
-            if(arquivoCriado.createNewFile()){
-                System.out.println("Arquivo criado:" + arquivoCriado.getName());
-            }
-            else{
-                System.out.println("Arquivo ja existe.");
-            }
+            arquivo.writeObject(cadastro);
+            arquivo.flush();
+            arquivo.close();
 
-            // Escrita do arquivo
-            arquivoEscrito = new FileWriter(nomeDoArquivo);
-
-
-            
+            streamDoArquivo.flush();
+            streamDoArquivo.close();
+            System.out.println("Arquivo salvo com sucesso!");
         }
         catch(IOException e){
             System.out.println("Ocorreu um erro");
         }
-
     }
 
-    public void leArquivo(){
+    public void leArquivo(String nomeDoArquivo){
+        // try{
+        //     FileInputStream streamDoArquivo = new FileInputStream("./files" + nomeDoArquivo);
+        //     ObjectInputStream arquivo = new ObjectInputStream(streamDoArquivo);
+
+        //     this.
+        // }
+        // catch(IOException e){
+        //     System.out.println("Ocorreu um erro");
+        // }
     }
 
     public void emprestaLivro(){
