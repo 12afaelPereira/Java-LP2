@@ -3,6 +3,7 @@ package lp2g43.biblioteca;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.io.FileOutputStream;
@@ -71,7 +72,15 @@ public class Biblioteca{
         // }
     }
 
-    public void emprestaLivro(){
+    public void emprestaLivro(Usuario usuario, Livro livro){
+    	Calendar data = Calendar.getInstance();
+
+    	// adicionando 7 dias a data atual
+    	data.add(Calendar.DATE, 7);
+    	
+    	livro.empresta();
+    	
+    	usuario.addLivroHist(Calendar.DATE, Calendar.MONTH, Calendar.YEAR, data.get(Calendar.DATE), data.get(Calendar.MONTH), data.get(Calendar.YEAR), livro.getCodigoLivro());
     }
 
     public void devolveLivro(){
