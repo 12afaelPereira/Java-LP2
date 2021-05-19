@@ -27,6 +27,14 @@ public class Emprestimo{
         dataDeDevolucao = new GregorianCalendar(ano, mes, dia);
     }
 
+	public GregorianCalendar getDataDoEmprestimo() {
+		return dataDoEmprestimo;
+	}
+
+	public GregorianCalendar getDataDeDevolucao() {
+		return dataDeDevolucao;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

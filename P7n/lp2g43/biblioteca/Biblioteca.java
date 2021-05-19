@@ -19,6 +19,8 @@ public class Biblioteca{
     protected Hashtable<String, Livro> cadastroDelivros = null;
     protected ArrayList<String> livrosOrdenados = new ArrayList<String>();
     protected ArrayList<String> usuariosOrdenados = new ArrayList<String>();
+    protected Calendar dataDeEmprestimo = null;
+    protected Calendar dataDeDevolucao = null;
 
 
     public Biblioteca(Hashtable<Integer, Usuario> cadastroDeUsuarios, Hashtable<String, Livro> cadastroDelivros){
@@ -73,17 +75,34 @@ public class Biblioteca{
     }
 
     public void emprestaLivro(Usuario usuario, Livro livro){
-    	Calendar data = Calendar.getInstance();
-
+    	//dataDeEmprestimo = Calendar.getInstance();
+    	dataDeDevolucao = Calendar.getInstance();
+    	
     	// adicionando 7 dias a data atual
-    	data.add(Calendar.DATE, 7);
-    	
+    	dataDeDevolucao.add(Calendar.DATE, 7);
+
     	livro.empresta();
-    	
-    	usuario.addLivroHist(Calendar.DATE, Calendar.MONTH, Calendar.YEAR, data.get(Calendar.DATE), data.get(Calendar.MONTH), data.get(Calendar.YEAR), livro.getCodigoLivro());
+    	usuario.addLivroHist(Calendar.DATE, Calendar.MONTH, Calendar.YEAR, 
+                            dataDeDevolucao.get(Calendar.DATE), 
+                            dataDeDevolucao.get(Calendar.MONTH), 
+                            dataDeDevolucao.get(Calendar.YEAR), 
+                            livro.getCodigoLivro());
     }
 
-    public void devolveLivro(){
+    public void devolveLivro(Usuario usuario, Livro livro){
+        livro.devolve();
+        
+        for(Emprestimo emprestimo : usuario.getHistorico()) {
+        	if(emprestimo.codigoDoLivro.contains(livro.getCodigoLivro())) {
+
+
+        		livro.addUsuarioHist(emprestimo.getDataDoEmprestimo().get(Calendar.DATE), 
+                                    emprestimo.getDataDoEmprestimo().get(Calendar.MONTH), 
+                                    emprestimo.getDataDoEmprestimo().get(Calendar.YEAR), 
+                                    Calendar.DATE, Calendar.MONTH, Calendar.YEAR, 
+                                    usuario.getCodigoUsuario());
+        	}
+        }
     }
 
     public String imprimeLivros(){
