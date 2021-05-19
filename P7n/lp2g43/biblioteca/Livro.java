@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Livro{
 
-    // *** Atributos ***
+	// *** Atributos ***
     protected String codigoDoLivro = "";
     protected String titulo = "";
     protected String categoria = "";
@@ -47,10 +47,6 @@ public class Livro{
         }
     }
 
-    public String getCodigoLivro(){
-        return this.codigoDoLivro;
-    }
-
     public void addUsuarioHist(int diaDoEmprestimo, int mesDoEmprestimo, int anoDoEmprestimo, 
                       int diaDaDevolucao, int mesDaDevolucao, int anoDaDevolucao,
                       int codigoDoUsuario){
@@ -59,5 +55,37 @@ public class Livro{
                                         diaDaDevolucao, mesDaDevolucao, anoDaDevolucao, codigoDoUsuario));
 
     }
+    
+    public String getCodigoLivro(){
+        return codigoDoLivro;
+    }
+    
+    public String getTitulo() {
+		return titulo;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public int getEmprestados() {
+		return emprestados;
+	}
+
+	public ArrayList<EmprestadoPara> getHistorico() {
+		return historico;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
+	
 
 }

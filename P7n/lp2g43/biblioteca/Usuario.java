@@ -7,7 +7,7 @@ public class Usuario extends Pessoa{
     // *** Atributos ***
     protected String endereco = "";
     protected int codigoUsuario = 0;
-    protected ArrayList<Emprestimo> historico = new ArrayList<Emprestimo>();
+	protected ArrayList<Emprestimo> historico = new ArrayList<Emprestimo>();
 
 
     public Usuario(String nome, int dia, int mes, int ano, String endereco, int codigoUsuario, ArrayList<Emprestimo> historico){
@@ -18,9 +18,6 @@ public class Usuario extends Pessoa{
         this.historico = historico;
     }
 
-    public int getCodigoUsuario(){
-        return this.codigoUsuario;
-    }
 
     public void addLivroHist(int diaDoEmprestimo, 
                       int mesDoEmprestimo, 
@@ -34,6 +31,25 @@ public class Usuario extends Pessoa{
                                     diaDaDevolucao, mesDaDevolucao, anoDaDevolucao, codigoDoLivro));
     }
 
+    public int getCodigoUsuario(){
+        return codigoUsuario;
+    }
+    
+    public String getEndereco() {
+		return endereco;
+	}
 
+	public ArrayList<Emprestimo> getHistorico() {
+		return historico;
+	}
+
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
+	
 
 }

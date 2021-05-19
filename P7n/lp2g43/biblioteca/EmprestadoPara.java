@@ -26,4 +26,11 @@ public class EmprestadoPara{
     protected void setDataDaDevolucao(int dia, int mes, int ano){
         dataDeDevolucao = new GregorianCalendar(ano, mes, dia);
     }
+
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
 }

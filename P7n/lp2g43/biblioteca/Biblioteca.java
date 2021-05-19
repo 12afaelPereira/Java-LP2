@@ -34,12 +34,10 @@ public class Biblioteca{
 
 
     public void cadastraUsuario(Usuario usuario){
-
         cadastroDeUsuarios.put(usuario.getCodigoUsuario(), usuario);
     }
 
     public void cadastraLivro(Livro livro){
-
         cadastroDelivros.put(livro.getCodigoLivro(), livro);
     }
 
@@ -116,4 +114,12 @@ public class Biblioteca{
     public Usuario getUsuario(int codigoDoUsuario){
         return cadastroDeUsuarios.get(codigoDoUsuario);
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+    
+    
 }
