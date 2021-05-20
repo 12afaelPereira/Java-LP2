@@ -60,6 +60,7 @@ public class Biblioteca{
         }
         catch(IOException e){
             System.out.println("Ocorreu um erro");
+            e.printStackTrace();
         }
     }
 

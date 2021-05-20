@@ -1,10 +1,11 @@
 package lp2g43.biblioteca;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 //import lp2g43.biblioteca.CopiaNaoDisponivelEx;
 //import lp2g43.biblioteca.NenhumaCopiaEmprestadaEx;
 
-public class Livro{
+public class Livro implements Serializable{
 
 	// *** Atributos ***
     protected String codigoDoLivro = "";

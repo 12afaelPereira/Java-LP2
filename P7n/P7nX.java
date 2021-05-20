@@ -3,6 +3,7 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 import lp2g43.biblioteca.Biblioteca;
+import lp2g43.biblioteca.EmprestadoPara;
 import lp2g43.biblioteca.Emprestimo;
 import lp2g43.biblioteca.Livro;
 import lp2g43.biblioteca.Usuario;
@@ -12,6 +13,7 @@ public class P7nX {
 	static Scanner entrada = new Scanner(System.in);
 	static String entradaMenu = "";
 	static String entradaCadastro = "";
+	static String entradaSalvarCadastro = "";
 	
 	static String nomeUsuario = "";
 	static String enderecoUsuario = "";
@@ -19,16 +21,26 @@ public class P7nX {
 	static int dia = 0;
 	static int mes = 0;
 	static int ano = 0;
-	
 	static ArrayList<Emprestimo> historicoUsuario = new ArrayList<Emprestimo>();
-	static Hashtable<Integer, Usuario> cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
-	static Hashtable<String, Livro> cadastroDelivros = new Hashtable<String, Livro>();
 	
-	static Biblioteca biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDelivros);
+	static String codigoLivro = "";
+	static String tituloLivro = "";
+	static String categoriaLivro = "";
+	static int quantidadeLivro = 0;
+	static int livrosEmprestados = 0;
+	static ArrayList<EmprestadoPara> historicoLivro = new ArrayList<EmprestadoPara>();
+	
+	static Hashtable<Integer, Usuario> cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
+	static Hashtable<String, Livro> cadastroDeLivros = new Hashtable<String, Livro>();
+	static Biblioteca biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
+	
 
 	public static void main(String[] args) {
 
-		while (true) {
+		boolean sair = false;
+		
+		while (!sair) {
+			
 			switch (menu()) {
 			case "1":
 				// Manutencao
@@ -46,7 +58,11 @@ public class P7nX {
 				// Relatorio
 				System.out.println("-- Relatorios");
 				break;
-
+			case "5":
+				// Sair
+				System.out.println("-- Fechando programa!");
+				sair = true;
+				break;
 			default:
 				System.out.println("Digite uma opcao valida!");
 				break;
@@ -66,6 +82,7 @@ public class P7nX {
 		System.out.println("  * 2 - Cadastros   *");
 		System.out.println("  * 3 - Emprestimos *");
 		System.out.println("  * 4 - Relatorios  *");
+		System.out.println("  * 5 - Sair        *");
 		System.out.println("  *******************");
 		entradaMenu = entrada.nextLine();
 
@@ -76,12 +93,12 @@ public class P7nX {
 		entradaCadastro = "";
 
 		System.out.println("-- Cadastro");
-		System.out.println("    *******************");
+		System.out.println("  *************************");
 		System.out.println("  * 1 - Cadastrar Usuario *");
 		System.out.println("  * 2 - Cadastrar Livro   *");
 		System.out.println("  * 3 - Salvar            *");
 		System.out.println("  * 4 - Voltar            *");
-		System.out.println("    *******************");
+		System.out.println("  *************************");
 
 		entradaCadastro = entrada.nextLine();
 		
@@ -92,10 +109,11 @@ public class P7nX {
 			break;
 		case "2":
 			System.out.println("-- Cadastrar Livro");
-			
+			cadastrarLivro();
 			break;
 		case "3":
-			System.out.println("-- Salvar");
+			System.out.println("-- Salvar cadastro");
+			salvarCadastro();
 			break;
 		case "4":
 			System.out.println("-- Voltar");
@@ -106,10 +124,11 @@ public class P7nX {
 		}
 	}
 	
+
 	public static void cadastrarUsuario() {
-		//boolean continuar = true;
+		String continuar = "s";
 		
-		//while(continuar) {
+		while(continuar.toLowerCase().equals("s")) {
 			System.out.println("Digite o nome do usuario: ");
 			nomeUsuario = entrada.nextLine();
 			
@@ -133,8 +152,70 @@ public class P7nX {
 			System.out.println("Usuario cadastrado!");
 
 			System.out.println("Deseja cadastrar outro usuario? (s/n)");
-		//}
+			continuar = entrada.nextLine();
+		}
 		
+	}
+	
+	public static void cadastrarLivro() {
+		String continuar = "s";
+		
+		while(continuar.toLowerCase().equals("s")) {
+			System.out.println("Titulo do livro: ");
+			tituloLivro = entrada.nextLine();
+			
+			System.out.println("Digite o codigo do livro: (string) ");
+			codigoLivro = entrada.nextLine();
+			
+			System.out.println("Categoria: ");
+			categoriaLivro = entrada.nextLine();
+			
+			System.out.println("Quantidade de exemplares: ");
+			quantidadeLivro = Integer.parseInt(entrada.nextLine());
+			
+			//System.out.println("Livros emprestados: ");
+			//livrosEmprestados = Integer.parseInt(entrada.nextLine());
+			
+			biblioteca.cadastraLivro(new Livro(codigoLivro, tituloLivro, categoriaLivro, quantidadeLivro, 0));
+			
+			System.out.println("Livro cadastrado!");
+
+			System.out.println("Deseja cadastrar outro Livro? (s/n)");
+			continuar = entrada.nextLine();
+		}
+		
+	}
+	
+	public static void salvarCadastro() {
+		entradaSalvarCadastro = ""; 
+		
+		System.out.println("  **********************************");
+		System.out.println("  * 1 - Salvar cadastro de usuario *");
+		System.out.println("  * 2 - Salvar cadastro de livro   *");
+		System.out.println("  * 3 - Menu                       *");
+		System.out.println("  **********************************");
+		
+		
+		entradaSalvarCadastro = entrada.nextLine();
+		
+		switch (entradaSalvarCadastro) {
+		case "1":
+			System.out.println("-- Salvando cadastro de usuario");
+			biblioteca.salvaArquivo(cadastroDeUsuarios, "CadastroDeUsuarios.md");
+			
+			break;
+		case "2":
+			System.out.println("-- Salvando cadastro de livro");
+			biblioteca.salvaArquivo(cadastroDeLivros, "CadastroDeLivros");
+			
+			break;
+		case "3":
+			System.out.println("-- Voltando pro menu");
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			break;
+		}
 	}
 
 }
