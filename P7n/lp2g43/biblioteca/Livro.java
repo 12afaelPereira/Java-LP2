@@ -82,10 +82,12 @@ public class Livro{
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "Codigo do livro: "  + getCodigoLivro() + System.lineSeparator()
+			+ "Titulo: " + getTitulo() + System.lineSeparator()
+			+ "Categoria: " + getCategoria() + System.lineSeparator()
+			+ "Quantidade: " + getQuantidade() + System.lineSeparator()
+			+ "Emprestados: " + getEmprestados() + System.lineSeparator()
+			+ "Historico" + getHistorico().toString();
 	}
 	
-	
-
 }

@@ -46,10 +46,9 @@ public class Usuario extends Pessoa{
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+        return super.toString() 
+        		+ "Codigo do usuario: "  + getCodigoUsuario() + System.lineSeparator()
+        		+ "Endereco: " + getEndereco()
+        		+ "Historico: " + getHistorico().toString();
 	}
-	
-	
-
 }

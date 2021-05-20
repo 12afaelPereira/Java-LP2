@@ -153,12 +153,5 @@ public class Biblioteca{
     public Usuario getUsuario(int codigoDoUsuario){
         return cadastroDeUsuarios.get(codigoDoUsuario);
     }
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-    
     
 }

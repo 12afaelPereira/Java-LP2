@@ -35,10 +35,15 @@ public class Emprestimo{
 		return dataDeDevolucao;
 	}
 
+	public String getCodigoDoLivro() {
+		return codigoDoLivro;
+	}
+
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "Codigo do livro: " + getCodigoDoLivro() + System.lineSeparator()
+			+ "Data do emprestimo: " + getDataDoEmprestimo() + System.lineSeparator()
+			+ "Data da devoluvao: " + getDataDeDevolucao();
 	}
     
 }
