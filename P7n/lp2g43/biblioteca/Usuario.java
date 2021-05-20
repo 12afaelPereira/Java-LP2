@@ -5,7 +5,12 @@ import java.util.ArrayList;
 
 public class Usuario extends Pessoa implements Serializable{
 
-    // *** Atributos ***
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6069988736685758894L;
+	
+	// *** Atributos ***
     protected String endereco = "";
     protected int codigoUsuario = 0;
 	protected ArrayList<Emprestimo> historico = new ArrayList<Emprestimo>();

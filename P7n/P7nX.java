@@ -192,7 +192,7 @@ public class P7nX {
 		System.out.println("  **********************************");
 		System.out.println("  * 1 - Salvar cadastro de usuario *");
 		System.out.println("  * 2 - Salvar cadastro de livro   *");
-		System.out.println("  * 3 - Menu                       *");
+		System.out.println("  * 3 - Voltar ao Menu             *");
 		System.out.println("  **********************************");
 		
 		
@@ -201,7 +201,7 @@ public class P7nX {
 		switch (entradaSalvarCadastro) {
 		case "1":
 			System.out.println("-- Salvando cadastro de usuario");
-			biblioteca.salvaArquivo(cadastroDeUsuarios, "CadastroDeUsuarios.md");
+			biblioteca.salvaArquivo(cadastroDeUsuarios, "CadastroDeUsuarios");
 			
 			break;
 		case "2":

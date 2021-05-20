@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 public class Livro implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1752019598769239118L;
+	
+	
 	// *** Atributos ***
     protected String codigoDoLivro = "";
     protected String titulo = "";

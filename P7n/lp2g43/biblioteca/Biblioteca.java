@@ -30,11 +30,11 @@ public class Biblioteca{
         this.cadastroDelivros = cadastroDelivros;
     }
 
-    // public Biblioteca(String cadastroDeUsuarios, String cadastroDelivros){
+    public Biblioteca(String cadastroDeUsuarios, String cadastroDelivros){
 
-    //     this.cadastroDeUsuarios = cadastroDeUsuarios;
-    //     this.cadastroDelivros = cadastroDelivros;
-    // }
+        this.leArquivo(cadastroDeUsuarios);
+        this.leArquivo(cadastroDelivros);
+    }
 
 
     public void cadastraUsuario(Usuario usuario){
@@ -47,7 +47,7 @@ public class Biblioteca{
 
     public void salvaArquivo(Hashtable cadastro, String nomeDoArquivo){
         try{
-            FileOutputStream streamDoArquivo = new FileOutputStream("./files" + nomeDoArquivo);
+            FileOutputStream streamDoArquivo = new FileOutputStream(nomeDoArquivo);
             ObjectOutputStream arquivo = new ObjectOutputStream(streamDoArquivo);
 
             arquivo.writeObject(cadastro);
@@ -65,15 +65,28 @@ public class Biblioteca{
     }
 
     public void leArquivo(String nomeDoArquivo){
-        // try{
-        //     FileInputStream streamDoArquivo = new FileInputStream("./files" + nomeDoArquivo);
-        //     ObjectInputStream arquivo = new ObjectInputStream(streamDoArquivo);
+        try{
+            FileInputStream streamDoArquivo = new FileInputStream(nomeDoArquivo);
+            ObjectInputStream arquivo = new ObjectInputStream(streamDoArquivo);
 
-        //     this.
-        // }
-        // catch(IOException e){
-        //     System.out.println("Ocorreu um erro");
-        // }
+            if(nomeDoArquivo.equals("CadastroDeUsuarios")) {
+            	cadastroDeUsuarios = (Hashtable<Integer, Usuario>) arquivo.readObject();
+            	
+            	arquivo.close();
+            	streamDoArquivo.close();
+            }
+            
+            else if(nomeDoArquivo.equals("CadastroDeLivros")) {
+            	cadastroDelivros = (Hashtable<String, Livro>) arquivo.readObject();
+            	
+            	arquivo.close();
+            	streamDoArquivo.close();
+            }
+        }
+        catch(IOException | ClassNotFoundException e){
+            System.out.println("Ocorreu um erro");
+            e.printStackTrace();
+        }
     }
 
     public void emprestaLivro(Usuario usuario, Livro livro){
