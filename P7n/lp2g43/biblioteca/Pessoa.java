@@ -1,11 +1,18 @@
 package lp2g43.biblioteca;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
-public class Pessoa{
+public class Pessoa implements Serializable{
 
-    // *** Atributos ***
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5397495808057773169L;
+	
+	
+	// *** Atributos ***
     protected String nome = "";
 	protected GregorianCalendar dataDeNascimento = null;
 

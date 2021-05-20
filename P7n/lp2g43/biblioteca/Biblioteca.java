@@ -132,7 +132,7 @@ public class Biblioteca{
 
     public String imprimeLivros(){
         for (Map.Entry<String, Livro> e : cadastroDelivros.entrySet()){
-            livrosOrdenados.add(e.getValue().titulo);
+            livrosOrdenados.add(e.getValue().getTitulo());
         }
 
         Collections.sort(livrosOrdenados, new Comparator<String>(){
@@ -147,7 +147,7 @@ public class Biblioteca{
 
     public String imprimeUsuarios(){
         for (Map.Entry<Integer, Usuario> e : cadastroDeUsuarios.entrySet()){
-            usuariosOrdenados.add(e.getValue().nome);
+            usuariosOrdenados.add(e.getValue().getNome());
         }
 
         Collections.sort(usuariosOrdenados, new Comparator<String>(){
@@ -167,5 +167,23 @@ public class Biblioteca{
     public Usuario getUsuario(int codigoDoUsuario){
         return cadastroDeUsuarios.get(codigoDoUsuario);
     }
+
+	public Hashtable<Integer, Usuario> getCadastroDeUsuarios() {
+		return cadastroDeUsuarios;
+	}
+
+	public Hashtable<String, Livro> getCadastroDelivros() {
+		return cadastroDelivros;
+	}
+
+	public Calendar getDiasComOLivro() {
+		return diasComOLivro;
+	}
+
+	public Calendar getDataDeDevolucao() {
+		return dataDeDevolucao;
+	}
+    
+    
     
 }

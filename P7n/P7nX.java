@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -31,14 +32,15 @@ public class P7nX {
 	static ArrayList<EmprestadoPara> historicoLivro = new ArrayList<EmprestadoPara>();
 	
 	
-	
-	static Hashtable<Integer, Usuario> cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
-	static Hashtable<String, Livro> cadastroDeLivros = new Hashtable<String, Livro>();
-	static Biblioteca biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
-	
 
+	static Hashtable<Integer, Usuario> cadastroDeUsuarios = null;
+	static Hashtable<String, Livro> cadastroDeLivros = null;
+	static Biblioteca biblioteca = null;
+	
+	
 	public static void main(String[] args) {
-
+		checkFile();
+		
 		boolean sair = false;
 		
 		while (!sair) {
@@ -73,6 +75,27 @@ public class P7nX {
 		}
 
 	}
+
+	
+	public static void checkFile() {
+		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables zerados
+		
+		File usuariosCadastrados = new File("CadastroDeUsuarios");
+		File livrosCadastrados = new File("CadastroDeLivros");
+		
+		if(usuariosCadastrados.exists() && livrosCadastrados.exists()) {
+			biblioteca = new Biblioteca("CadastroDeUsuarios", "CadastroDeLivros");
+			cadastroDeLivros = biblioteca.getCadastroDelivros();
+			cadastroDeUsuarios = biblioteca.getCadastroDeUsuarios();
+		}
+		else {
+			cadastroDeLivros = new Hashtable<String, Livro>();
+			cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
+			biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
+		}
+		
+	}
+	
 
 	public static String menu() {
 		entradaMenu = "";
@@ -226,9 +249,9 @@ public class P7nX {
 		
 		System.out.println("  *****************************");
 		System.out.println("  * 1 - Acervo de livros      *");
-		System.out.println("  * 2 - Cadastro de usuarios  *");
-		System.out.println("  * 3 - Usuario - Detalhes    *");
-		System.out.println("  * 4 - Livro - Detalhes      *");
+		System.out.println("  * 2 - Usuarios cadastrados  *");
+		System.out.println("  * 3 - Detalhes de Usuario   *");
+		System.out.println("  * 4 - Detalhes de livro     *");
 		System.out.println("  * 5 - Voltar ao menu        *");
 		System.out.println("  *****************************");
 		
