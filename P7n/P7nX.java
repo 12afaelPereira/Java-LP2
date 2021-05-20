@@ -9,11 +9,11 @@ import lp2g43.biblioteca.Livro;
 import lp2g43.biblioteca.Usuario;
 
 public class P7nX {
-
 	static Scanner entrada = new Scanner(System.in);
 	static String entradaMenu = "";
 	static String entradaCadastro = "";
 	static String entradaSalvarCadastro = "";
+	static String entradaRelatorio = "";
 	
 	static String nomeUsuario = "";
 	static String enderecoUsuario = "";
@@ -29,6 +29,8 @@ public class P7nX {
 	static int quantidadeLivro = 0;
 	static int livrosEmprestados = 0;
 	static ArrayList<EmprestadoPara> historicoLivro = new ArrayList<EmprestadoPara>();
+	
+	
 	
 	static Hashtable<Integer, Usuario> cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
 	static Hashtable<String, Livro> cadastroDeLivros = new Hashtable<String, Livro>();
@@ -57,6 +59,7 @@ public class P7nX {
 			case "4":
 				// Relatorio
 				System.out.println("-- Relatorios");
+				relatorio();
 				break;
 			case "5":
 				// Sair
@@ -97,7 +100,7 @@ public class P7nX {
 		System.out.println("  * 1 - Cadastrar Usuario *");
 		System.out.println("  * 2 - Cadastrar Livro   *");
 		System.out.println("  * 3 - Salvar            *");
-		System.out.println("  * 4 - Voltar            *");
+		System.out.println("  * 4 - Voltar ao menu    *");
 		System.out.println("  *************************");
 
 		entradaCadastro = entrada.nextLine();
@@ -210,6 +213,45 @@ public class P7nX {
 			
 			break;
 		case "3":
+			System.out.println("-- Voltando pro menu");
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			break;
+		}
+	}
+	
+	private static void relatorio() {
+		entradaRelatorio = ""; 
+		
+		System.out.println("  *****************************");
+		System.out.println("  * 1 - Acervo de livros      *");
+		System.out.println("  * 2 - Cadastro de usuarios  *");
+		System.out.println("  * 3 - Usuario - Detalhes    *");
+		System.out.println("  * 4 - Livro - Detalhes      *");
+		System.out.println("  * 5 - Voltar ao menu        *");
+		System.out.println("  *****************************");
+		
+		entradaRelatorio = entrada.nextLine();
+		
+		switch (entradaRelatorio) {
+		case "1":
+			System.out.println("-- Acervo de livros");
+			
+			System.out.println(biblioteca.imprimeLivros());
+			break;
+		case "2":
+			System.out.println("-- Cadastro de usuarios");
+			
+			System.out.println(biblioteca.imprimeUsuarios());
+			break;
+		case "3":
+			System.out.println("-- Usuario - Detalhes");
+			break;
+		case "4":
+			System.out.println("-- Livro - Detalhes");
+			break;
+		case "5":
 			System.out.println("-- Voltando pro menu");
 			break;
 		default:
