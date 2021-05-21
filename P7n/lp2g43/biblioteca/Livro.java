@@ -44,7 +44,7 @@ public class Livro implements Serializable{
         }
     }
 
-    protected void devolve(){
+    protected void devolve() throws NenhumaCopiaEmprestadaEx{
 
         if(emprestados == 0){
             throw new NenhumaCopiaEmprestadaEx("Nenhuma copia emprestada ainda");

@@ -269,7 +269,7 @@ public class P7nX {
 			break;
 		case "3":
 			System.out.println("-- Devolucao");
-
+			devolucao();
 			break;
 		case "4":
 			System.out.println("-- Voltando pro menu");
@@ -282,6 +282,7 @@ public class P7nX {
 		}
 
 	}
+
 
 	public static void fazerEmprestimo() {
 
@@ -313,6 +314,39 @@ public class P7nX {
 
 		biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
 	}
+	
+	public static void devolucao() {
+		// TODO Auto-generated method stub
+		String codLivro = "";
+		int codUsuario = 0;
+
+		while (true) {
+			System.out.println("Codigo do livro a ser devolvido: ");
+			codLivro = entrada.nextLine();
+
+			if (biblioteca.getLivro(codLivro) != null) {
+				break;
+			} else {
+				System.out.println("Codigo de livro nao existente!");
+			}
+		}
+
+		while (true) {
+			System.out.println("Codigo do usuario a devolver o livro: ");
+			codUsuario = Integer.parseInt(entrada.nextLine());
+
+			if (biblioteca.getUsuario(codUsuario) != null) {
+				break;
+			} else {
+				System.out.println("Codigo  de usuario nao existente!");
+			}
+
+		}
+
+		biblioteca.devolveLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
+		
+	}
+	
 
 	private static void relatorio() {
 		String entradaRelatorio = "";

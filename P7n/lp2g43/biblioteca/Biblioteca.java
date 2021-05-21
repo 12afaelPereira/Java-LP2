@@ -125,29 +125,37 @@ public class Biblioteca{
     }
 
     public void devolveLivro(Usuario usuario, Livro livro){
-        livro.devolve();
         
-        for(Emprestimo emprestimo : usuario.getHistorico()) {
-        	if(emprestimo.codigoDoLivro.contains(livro.getCodigoLivro())) {
-
-        		diasComOLivro.setTimeInMillis(emprestimo.getDataDeDevolucao().getTimeInMillis() - emprestimo.getDataDoEmprestimo().getTimeInMillis());
-        		
-        		//int days = (int) (diasComOLivro / (1000*60*60*24));
-        		
-        		livro.addUsuarioHist(emprestimo.getDataDoEmprestimo().get(Calendar.DATE), 
-                                    emprestimo.getDataDoEmprestimo().get(Calendar.MONTH), 
-                                    emprestimo.getDataDoEmprestimo().get(Calendar.YEAR), 
-                                    Calendar.DATE, Calendar.MONTH, Calendar.YEAR, 
-                                    usuario.getCodigoUsuario());
-        	}
-        }
+    	try {
+			livro.devolve();
+			
+			for(Emprestimo emprestimo : usuario.getHistorico()) {
+				if(emprestimo.codigoDoLivro.contains(livro.getCodigoLivro())) {
+					
+					diasComOLivro.setTimeInMillis(emprestimo.getDataDeDevolucao().getTimeInMillis() - emprestimo.getDataDoEmprestimo().getTimeInMillis());
+					
+					//int days = (int) (diasComOLivro / (1000*60*60*24));
+					
+					livro.addUsuarioHist(emprestimo.getDataDoEmprestimo().get(Calendar.DATE), 
+							emprestimo.getDataDoEmprestimo().get(Calendar.MONTH), 
+							emprestimo.getDataDoEmprestimo().get(Calendar.YEAR), 
+							Calendar.DATE, Calendar.MONTH, Calendar.YEAR, 
+							usuario.getCodigoUsuario());
+				}
+			}
+			
+			if(diasComOLivro.get(Calendar.DATE) > 7) {
+				System.out.println("Livro devolvido! <<Atencao!!>> Multa por atraso!");
+			}
+			else {
+				System.out.println("Devolvido!");
+			}
+			
+		} 
+    	catch (NenhumaCopiaEmprestadaEx e) {
+    		System.out.println(e.getMessage());
+		}
         
-        if(diasComOLivro.get(Calendar.DATE) > 7) {
-        	System.out.println("Multa por atraso!");
-        }
-        else {
-        	System.out.println("Devolvido!");
-        }
     }
 
     public String imprimeLivros(){
