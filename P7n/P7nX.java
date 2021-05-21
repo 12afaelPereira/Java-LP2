@@ -1,6 +1,8 @@
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import lp2g43.biblioteca.Biblioteca;
@@ -270,9 +272,11 @@ public class P7nX {
 			break;
 		case "3":
 			System.out.println("-- Usuario - Detalhes");
+			detalhesUsuario();
 			break;
 		case "4":
 			System.out.println("-- Livro - Detalhes");
+			detalhesLivro();
 			break;
 		case "5":
 			System.out.println("-- Voltando pro menu");
@@ -281,6 +285,38 @@ public class P7nX {
 			System.out.println("Digite uma opcao valida!");
 			break;
 		}
+	}
+
+
+	public static void detalhesLivro() {
+		String codLivro = "";
+		
+		System.out.println("Digite o codigo do livro");
+		codLivro = entrada.nextLine();
+		
+		for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()){
+
+			if(livro.getValue().getCodigoLivro().equals(codLivro)) {
+				System.out.println(livro.toString());
+			}
+        }
+	}
+
+
+	public static void detalhesUsuario() {
+		/*
+		 * int codUsuario = 0;
+		 * 
+		 * System.out.println("Digite o codigo do livro"); codUsuario =
+		 * Integer.parseInt(codigoLivro).nextLine();
+		 * 
+		 * for (Map.Entry<Integer, Usuario> usuario :
+		 * biblioteca.getCadastroDeUsuarios().entrySet()){
+		 * 
+		 * if(usuario.getValue().getCodigoUsuario()) {
+		 * //System.out.println(livro.toString()); } }
+		 */
+		
 	}
 
 }
