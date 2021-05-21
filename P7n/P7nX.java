@@ -13,11 +13,7 @@ import lp2g43.biblioteca.Usuario;
 
 public class P7nX {
 	static Scanner entrada = new Scanner(System.in);
-	static String entradaMenu = "";
-	static String entradaCadastro = "";
-	static String entradaSalvarCadastro = "";
-	static String entradaRelatorio = "";
-	
+
 	static String nomeUsuario = "";
 	static String enderecoUsuario = "";
 	static int codigoUsuario = 0;
@@ -25,28 +21,25 @@ public class P7nX {
 	static int mes = 0;
 	static int ano = 0;
 	static ArrayList<Emprestimo> historicoUsuario = new ArrayList<Emprestimo>();
-	
+
 	static String codigoLivro = "";
 	static String tituloLivro = "";
 	static String categoriaLivro = "";
 	static int quantidadeLivro = 0;
 	static int livrosEmprestados = 0;
 	static ArrayList<EmprestadoPara> historicoLivro = new ArrayList<EmprestadoPara>();
-	
-	
 
 	static Hashtable<Integer, Usuario> cadastroDeUsuarios = null;
 	static Hashtable<String, Livro> cadastroDeLivros = null;
 	static Biblioteca biblioteca = null;
-	
-	
+
 	public static void main(String[] args) {
 		checkFile();
-		
+
 		boolean sair = false;
-		
+
 		while (!sair) {
-			
+
 			switch (menu()) {
 			case "1":
 				// Manutencao
@@ -78,29 +71,27 @@ public class P7nX {
 
 	}
 
-	
 	public static void checkFile() {
-		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables zerados
-		
+		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables
+		// zerados
+
 		File usuariosCadastrados = new File("CadastroDeUsuarios");
 		File livrosCadastrados = new File("CadastroDeLivros");
-		
-		if(usuariosCadastrados.exists() && livrosCadastrados.exists()) {
+
+		if (usuariosCadastrados.exists() && livrosCadastrados.exists()) {
 			biblioteca = new Biblioteca("CadastroDeUsuarios", "CadastroDeLivros");
 			cadastroDeLivros = biblioteca.getCadastroDelivros();
 			cadastroDeUsuarios = biblioteca.getCadastroDeUsuarios();
-		}
-		else {
+		} else {
 			cadastroDeLivros = new Hashtable<String, Livro>();
 			cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
 			biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
 		}
-		
+
 	}
-	
 
 	public static String menu() {
-		entradaMenu = "";
+		String entradaMenu = "";
 
 		System.out.println("--- Biblioteca Digital - V1.0 ---");
 		System.out.println("Bem vindo! - Digite uma das opcoes do menu");
@@ -118,7 +109,7 @@ public class P7nX {
 	}
 
 	public static void cadastro() {
-		entradaCadastro = "";
+		String entradaCadastro = "";
 
 		System.out.println("-- Cadastro");
 		System.out.println("  *************************");
@@ -129,7 +120,7 @@ public class P7nX {
 		System.out.println("  *************************");
 
 		entradaCadastro = entrada.nextLine();
-		
+
 		switch (entradaCadastro) {
 		case "1":
 			System.out.println("-- Cadastrar Usuario");
@@ -148,107 +139,108 @@ public class P7nX {
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
+			cadastro();
 			break;
 		}
 	}
-	
 
 	public static void cadastrarUsuario() {
 		String continuar = "s";
-		
-		while(continuar.toLowerCase().equals("s")) {
+
+		while (continuar.toLowerCase().equals("s")) {
 			System.out.println("Digite o nome do usuario: ");
 			nomeUsuario = entrada.nextLine();
-			
+
 			System.out.println("Dia do nascimento: ");
 			dia = Integer.parseInt(entrada.nextLine());
-			
+
 			System.out.println("Mes do nascimento: ");
 			mes = Integer.parseInt(entrada.nextLine());
-			
+
 			System.out.println("Ano do nascimento: ");
 			ano = Integer.parseInt(entrada.nextLine());
-			
+
 			System.out.println("Endereco do usuario: ");
 			enderecoUsuario = entrada.nextLine();
-			
+
 			System.out.println("Digite um codigo para o usuario: (inteiro)");
 			codigoUsuario = Integer.parseInt(entrada.nextLine());
-			
-			biblioteca.cadastraUsuario(new Usuario(nomeUsuario, dia, mes, ano, enderecoUsuario, codigoUsuario, historicoUsuario));
-			
+
+			biblioteca.cadastraUsuario(
+					new Usuario(nomeUsuario, dia, mes, ano, enderecoUsuario, codigoUsuario, historicoUsuario));
+
 			System.out.println("Usuario cadastrado!");
 
 			System.out.println("Deseja cadastrar outro usuario? (s/n)");
 			continuar = entrada.nextLine();
 		}
-		
+
 	}
-	
+
 	public static void cadastrarLivro() {
 		String continuar = "s";
-		
-		while(continuar.toLowerCase().equals("s")) {
+
+		while (continuar.toLowerCase().equals("s")) {
 			System.out.println("Titulo do livro: ");
 			tituloLivro = entrada.nextLine();
-			
+
 			System.out.println("Digite o codigo do livro: (string) ");
 			codigoLivro = entrada.nextLine();
-			
+
 			System.out.println("Categoria: ");
 			categoriaLivro = entrada.nextLine();
-			
+
 			System.out.println("Quantidade de exemplares: ");
 			quantidadeLivro = Integer.parseInt(entrada.nextLine());
-			
-			//System.out.println("Livros emprestados: ");
-			//livrosEmprestados = Integer.parseInt(entrada.nextLine());
-			
+
+			// System.out.println("Livros emprestados: ");
+			// livrosEmprestados = Integer.parseInt(entrada.nextLine());
+
 			biblioteca.cadastraLivro(new Livro(codigoLivro, tituloLivro, categoriaLivro, quantidadeLivro, 0));
-			
+
 			System.out.println("Livro cadastrado!");
 
 			System.out.println("Deseja cadastrar outro Livro? (s/n)");
 			continuar = entrada.nextLine();
 		}
-		
+
 	}
-	
+
 	public static void salvarCadastro() {
-		entradaSalvarCadastro = ""; 
-		
+		String entradaSalvarCadastro = "";
+
 		System.out.println("  **********************************");
 		System.out.println("  * 1 - Salvar cadastro de usuario *");
 		System.out.println("  * 2 - Salvar cadastro de livro   *");
 		System.out.println("  * 3 - Voltar ao Menu             *");
 		System.out.println("  **********************************");
-		
-		
+
 		entradaSalvarCadastro = entrada.nextLine();
-		
+
 		switch (entradaSalvarCadastro) {
 		case "1":
 			System.out.println("-- Salvando cadastro de usuario");
 			biblioteca.salvaArquivo(cadastroDeUsuarios, "CadastroDeUsuarios");
-			
+
 			break;
 		case "2":
 			System.out.println("-- Salvando cadastro de livro");
 			biblioteca.salvaArquivo(cadastroDeLivros, "CadastroDeLivros");
-			
+
 			break;
 		case "3":
 			System.out.println("-- Voltando pro menu");
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
+			salvarCadastro();
 			break;
 		}
 	}
-	
+
 	private static void relatorio() {
-		entradaRelatorio = ""; 
-		
+		String entradaRelatorio = "";
+
 		System.out.println("  *****************************");
 		System.out.println("  * 1 - Acervo de livros      *");
 		System.out.println("  * 2 - Usuarios cadastrados  *");
@@ -256,18 +248,18 @@ public class P7nX {
 		System.out.println("  * 4 - Detalhes de livro     *");
 		System.out.println("  * 5 - Voltar ao menu        *");
 		System.out.println("  *****************************");
-		
+
 		entradaRelatorio = entrada.nextLine();
-		
+
 		switch (entradaRelatorio) {
 		case "1":
 			System.out.println("-- Acervo de livros");
-			
+
 			System.out.println(biblioteca.imprimeLivros());
 			break;
 		case "2":
 			System.out.println("-- Cadastro de usuarios");
-			
+
 			System.out.println(biblioteca.imprimeUsuarios());
 			break;
 		case "3":
@@ -283,40 +275,120 @@ public class P7nX {
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
+			relatorio();
 			break;
 		}
 	}
 
-
 	public static void detalhesLivro() {
-		String codLivro = "";
-		
-		System.out.println("Digite o codigo do livro");
-		codLivro = entrada.nextLine();
-		
-		for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()){
+		String entradaDetalhesLivro = "";
 
-			if(livro.getValue().getCodigoLivro().equals(codLivro)) {
-				System.out.println(livro.toString());
+		System.out.println("  *****************************");
+		System.out.println("  * 1 - listar pelo codigo    *");
+		System.out.println("  * 2 - Listar pelo titulo    *");
+		System.out.println("  * 3 - Voltar ao menu        *");
+		System.out.println("  *****************************");
+
+		entradaDetalhesLivro = entrada.nextLine();
+
+		switch (entradaDetalhesLivro) {
+		case "1":
+			System.out.println("-- Lista pelo codigo");
+
+			String codLivro = "";
+
+			System.out.println("Digite o codigo do livro");
+			codLivro = entrada.nextLine();
+
+			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
+
+				if (livro.getValue().getCodigoLivro().toLowerCase().equals(codLivro.toLowerCase())) {
+					System.out.println(livro.toString());
+				}
 			}
-        }
+
+			break;
+		case "2":
+			System.out.println("-- Lista pelo titulo");
+
+			String tituloLivro = "";
+
+			System.out.println("Digite o titulo do livro");
+			tituloLivro = entrada.nextLine();
+
+			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
+
+				if (livro.getValue().getTitulo().toLowerCase().equals(tituloLivro.toLowerCase())) {
+					System.out.println(livro.toString());
+				}
+			}
+
+			break;
+		case "3":
+			System.out.println("-- Voltando pro menu");
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			detalhesLivro();
+			break;
+		}
+
 	}
 
-
 	public static void detalhesUsuario() {
-		/*
-		 * int codUsuario = 0;
-		 * 
-		 * System.out.println("Digite o codigo do livro"); codUsuario =
-		 * Integer.parseInt(codigoLivro).nextLine();
-		 * 
-		 * for (Map.Entry<Integer, Usuario> usuario :
-		 * biblioteca.getCadastroDeUsuarios().entrySet()){
-		 * 
-		 * if(usuario.getValue().getCodigoUsuario()) {
-		 * //System.out.println(livro.toString()); } }
-		 */
+
+		String entradaDetalhesUsuario = "";
+
+		System.out.println("  *****************************");
+		System.out.println("  * 1 - listar pelo codigo    *");
+		System.out.println("  * 2 - Listar pelo nome      *");
+		System.out.println("  * 3 - Voltar ao menu        *");
+		System.out.println("  *****************************");
+
+		entradaDetalhesUsuario = entrada.nextLine();
+
 		
+		switch (entradaDetalhesUsuario) {
+		case "1":
+			System.out.println("-- Lista pelo codigo");
+
+			int codUsuario = 0;
+
+			System.out.println("Digite o codigo do usuario");
+			codUsuario = Integer.parseInt(entrada.nextLine());
+
+			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
+
+				if (usuario.getValue().getCodigoUsuario() == codUsuario) {
+					System.out.println(usuario.toString());
+				}
+			}
+
+			break;
+		case "2":
+			System.out.println("-- Lista pelo nome");
+
+			String nomeUsuario = "";
+
+			System.out.println("Digite o nome do usuario");
+			nomeUsuario = entrada.nextLine();
+
+			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
+
+				if (usuario.getValue().getNome().toLowerCase().equals(nomeUsuario.toLowerCase()) ) {
+					System.out.println(usuario.toString());
+				}
+			}
+			break;
+		case "3":
+			System.out.println("-- Voltando pro menu");
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			detalhesUsuario();
+			break;
+		}
+
 	}
 
 }

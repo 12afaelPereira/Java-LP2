@@ -1,6 +1,7 @@
 package lp2g43.biblioteca;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
@@ -39,7 +40,9 @@ public class Pessoa implements Serializable{
 	@Override
 	public String toString() {
 		return "Nome: " + getNome() + System.lineSeparator()
-			+ "Data de Nascimento: " + getDataDeNascimento() + System.lineSeparator();
+			+ "Data de Nascimento: " + getDataDeNascimento().get(Calendar.DATE) + "/" +
+									getDataDeNascimento().get(Calendar.MONTH) + "/" + 
+									getDataDeNascimento().get(Calendar.YEAR) + System.lineSeparator();
 	}
     
     
