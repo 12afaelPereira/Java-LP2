@@ -1,9 +1,15 @@
 package lp2g43.biblioteca;
 
-public class CopiaNaoDisponivelEx extends RuntimeException{
+public class CopiaNaoDisponivelEx extends Exception{
 
 
-    public CopiaNaoDisponivelEx(String message){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8645991792494485700L;
+	
+
+	public CopiaNaoDisponivelEx(String message){
         super(message);
     }
 }

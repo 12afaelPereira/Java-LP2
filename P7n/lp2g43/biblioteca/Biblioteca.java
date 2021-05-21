@@ -96,23 +96,32 @@ public class Biblioteca{
     	// adicionando 7 dias a data atual
     	dataDeDevolucao.add(Calendar.DATE, 7);
 
-    	livro.empresta();
+    	try {
+			livro.empresta();
+			
+			livro.addUsuarioHist(dataDeEmprestimo.get(Calendar.DATE), 
+					dataDeEmprestimo.get(Calendar.MONTH), 
+					dataDeEmprestimo.get(Calendar.YEAR), 
+					dataDeDevolucao.get(Calendar.DATE), 
+                    dataDeDevolucao.get(Calendar.MONTH), 
+                    dataDeDevolucao.get(Calendar.YEAR), 
+                    usuario.getCodigoUsuario());
+
+			usuario.addLivroHist(dataDeEmprestimo.get(Calendar.DATE), 
+					dataDeEmprestimo.get(Calendar.MONTH), 
+					dataDeEmprestimo.get(Calendar.YEAR), 
+                    dataDeDevolucao.get(Calendar.DATE), 
+                    dataDeDevolucao.get(Calendar.MONTH), 
+                    dataDeDevolucao.get(Calendar.YEAR), 
+                    livro.getCodigoLivro());
+			
+			System.out.println("Emprestimo feito!");
+		} 
+    	catch (CopiaNaoDisponivelEx e) {
+			System.out.println(e.getMessage());
+		}
     	
-    	livro.addUsuarioHist(dataDeEmprestimo.get(Calendar.DATE), 
-							dataDeEmprestimo.get(Calendar.MONTH), 
-							dataDeEmprestimo.get(Calendar.YEAR), 
-							dataDeDevolucao.get(Calendar.DATE), 
-                            dataDeDevolucao.get(Calendar.MONTH), 
-                            dataDeDevolucao.get(Calendar.YEAR), 
-                            usuario.getCodigoUsuario());
     	
-    	usuario.addLivroHist(dataDeEmprestimo.get(Calendar.DATE), 
-    						dataDeEmprestimo.get(Calendar.MONTH), 
-    						dataDeEmprestimo.get(Calendar.YEAR), 
-                            dataDeDevolucao.get(Calendar.DATE), 
-                            dataDeDevolucao.get(Calendar.MONTH), 
-                            dataDeDevolucao.get(Calendar.YEAR), 
-                            livro.getCodigoLivro());
     }
 
     public void devolveLivro(Usuario usuario, Livro livro){

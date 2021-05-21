@@ -295,7 +295,7 @@ public class P7nX {
 			if (biblioteca.getLivro(codLivro) != null) {
 				break;
 			} else {
-				System.out.println("Codigo nao existente!");
+				System.out.println("Codigo de livro nao existente!");
 			}
 		}
 
@@ -306,15 +306,12 @@ public class P7nX {
 			if (biblioteca.getUsuario(codUsuario) != null) {
 				break;
 			} else {
-				System.out.println("Codigo nao existente!");
+				System.out.println("Codigo  de usuario nao existente!");
 			}
 
 		}
 
 		biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
-		
-		System.out.println("Emprestimo feito!");
-
 	}
 
 	private static void relatorio() {

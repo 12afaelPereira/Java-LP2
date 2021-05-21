@@ -35,7 +35,7 @@ public class Livro implements Serializable{
     }
 
 
-    protected void empresta(){
+    protected void empresta() throws CopiaNaoDisponivelEx{
         if(emprestados == quantidade){
             throw new CopiaNaoDisponivelEx("Todas as copias estao emprestadas");
         }
