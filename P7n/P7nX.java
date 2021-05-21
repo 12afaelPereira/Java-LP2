@@ -52,6 +52,7 @@ public class P7nX {
 			case "3":
 				// Emprestimo
 				System.out.println("-- Emprestimos");
+				emprestimo();
 				break;
 			case "4":
 				// Relatorio
@@ -70,6 +71,7 @@ public class P7nX {
 		}
 
 	}
+
 
 	public static void checkFile() {
 		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables
@@ -238,6 +240,52 @@ public class P7nX {
 		}
 	}
 
+	public static void emprestimo() {
+		String entradaEmprestimo = "";
+
+		System.out.println("  **********************************");
+		System.out.println("  * 1 - Exibir cadastro de livros  *");
+		System.out.println("  * 2 - Fazer emprestimo           *");
+		System.out.println("  * 3 - Devolucao                  *");
+		System.out.println("  * 4 - Voltar ao menu             *");
+		System.out.println("  **********************************");
+
+		entradaEmprestimo = entrada.nextLine();
+		
+		switch (entradaEmprestimo) {
+		case "1":
+			System.out.println("-- Acervo de livros");
+			
+			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
+
+				System.out.println("----------- Livro -----------");
+				System.out.println(livro.getValue());
+			}
+			
+			break;
+		case "2":
+			System.out.println("-- Fazer emprestimo");
+
+			
+			break;
+		case "3":
+			System.out.println("-- Devolucao");
+			
+			
+			break;
+		case "4":
+			System.out.println("-- Voltando pro menu");
+			detalhesLivro();
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			emprestimo();
+			break;
+		}
+		
+	}
+	
+	
 	private static void relatorio() {
 		String entradaRelatorio = "";
 
@@ -303,7 +351,9 @@ public class P7nX {
 			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
 
 				if (livro.getValue().getCodigoLivro().toLowerCase().equals(codLivro.toLowerCase())) {
-					System.out.println(livro.toString());
+					System.out.println("----------- Livro -----------");
+					System.out.println(livro.getValue());
+					System.out.println("-----------------------------");
 				}
 			}
 
@@ -319,7 +369,9 @@ public class P7nX {
 			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
 
 				if (livro.getValue().getTitulo().toLowerCase().equals(tituloLivro.toLowerCase())) {
-					System.out.println(livro.toString());
+					System.out.println("----------- Livro -----------");
+					System.out.println(livro.getValue());
+					System.out.println("-----------------------------");
 				}
 			}
 
@@ -360,7 +412,9 @@ public class P7nX {
 			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
 
 				if (usuario.getValue().getCodigoUsuario() == codUsuario) {
-					System.out.println(usuario.toString());
+					System.out.println("---------- Usuario ----------");
+					System.out.println(usuario.getValue());
+					System.out.println("-----------------------------");
 				}
 			}
 
@@ -376,7 +430,9 @@ public class P7nX {
 			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
 
 				if (usuario.getValue().getNome().toLowerCase().equals(nomeUsuario.toLowerCase()) ) {
-					System.out.println(usuario.toString());
+					System.out.println("---------- Usuario ----------");
+					System.out.println(usuario.getValue());
+					System.out.println("-----------------------------");
 				}
 			}
 			break;
