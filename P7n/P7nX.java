@@ -72,7 +72,6 @@ public class P7nX {
 
 	}
 
-
 	public static void checkFile() {
 		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables
 		// zerados
@@ -251,27 +250,26 @@ public class P7nX {
 		System.out.println("  **********************************");
 
 		entradaEmprestimo = entrada.nextLine();
-		
+
 		switch (entradaEmprestimo) {
 		case "1":
 			System.out.println("-- Acervo de livros");
-			
+
 			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
 
 				System.out.println("----------- Livro -----------");
 				System.out.println(livro.getValue());
 			}
-			
+
 			break;
 		case "2":
 			System.out.println("-- Fazer emprestimo");
+			fazerEmprestimo();
 
-			
 			break;
 		case "3":
 			System.out.println("-- Devolucao");
-			
-			
+
 			break;
 		case "4":
 			System.out.println("-- Voltando pro menu");
@@ -282,10 +280,34 @@ public class P7nX {
 			emprestimo();
 			break;
 		}
-		
+
 	}
-	
-	
+
+	public static void fazerEmprestimo() {
+
+		/*
+		 * String codLivro = ""; int codUsuario = 0;
+		 * 
+		 * while (true) { System.out.println("Codigo do livro a ser emprestado: ");
+		 * codLivro = entrada.nextLine();
+		 * 
+		 * if (biblioteca.getLivro(codLivro) != null) { break; } else {
+		 * System.out.println("Codigo nao existente!"); } }
+		 * 
+		 * while(true) {
+		 * System.out.println("Codigo do usuario para quem sera emprestado: ");
+		 * codUsuario = Integer.parseInt(entrada.nextLine());
+		 * 
+		 * if (biblioteca.getUsuario(codUsuario) != null) { break; } else {
+		 * System.out.println("Codigo nao existente!"); }
+		 * 
+		 * }
+		 * 
+		 * biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario),
+		 * biblioteca.getLivro(codLivro));
+		 */
+	}
+
 	private static void relatorio() {
 		String entradaRelatorio = "";
 
@@ -348,13 +370,12 @@ public class P7nX {
 			System.out.println("Digite o codigo do livro");
 			codLivro = entrada.nextLine();
 
-			for (Map.Entry<String, Livro> livro : biblioteca.getCadastroDelivros().entrySet()) {
-
-				if (livro.getValue().getCodigoLivro().toLowerCase().equals(codLivro.toLowerCase())) {
-					System.out.println("----------- Livro -----------");
-					System.out.println(livro.getValue());
-					System.out.println("-----------------------------");
-				}
+			if (biblioteca.getLivro(codLivro) == null) {
+				System.out.println("O codigo " + codLivro + " nao existe!");
+			} else {
+				System.out.println("----------- Livro -----------");
+				System.out.println(biblioteca.getLivro(codLivro));
+				System.out.println("-----------------------------");
 			}
 
 			break;
@@ -399,23 +420,26 @@ public class P7nX {
 
 		entradaDetalhesUsuario = entrada.nextLine();
 
-		
 		switch (entradaDetalhesUsuario) {
 		case "1":
 			System.out.println("-- Lista pelo codigo");
 
 			int codUsuario = 0;
 
-			System.out.println("Digite o codigo do usuario");
-			codUsuario = Integer.parseInt(entrada.nextLine());
+			System.out.println("Digite o codigo do usuario (inteiro)");
 
-			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
+			try {
+				codUsuario = Integer.parseInt(entrada.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("Digite um numero inteiro!");
+			}
 
-				if (usuario.getValue().getCodigoUsuario() == codUsuario) {
-					System.out.println("---------- Usuario ----------");
-					System.out.println(usuario.getValue());
-					System.out.println("-----------------------------");
-				}
+			if (biblioteca.getUsuario(codUsuario) == null) {
+				System.out.println("O codigo " + codUsuario + " nao existe!");
+			} else {
+				System.out.println("---------- Usuario ----------");
+				System.out.println(biblioteca.getUsuario(codUsuario));
+				System.out.println("-----------------------------");
 			}
 
 			break;
@@ -429,7 +453,7 @@ public class P7nX {
 
 			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
 
-				if (usuario.getValue().getNome().toLowerCase().equals(nomeUsuario.toLowerCase()) ) {
+				if (usuario.getValue().getNome().toLowerCase().equals(nomeUsuario.toLowerCase())) {
 					System.out.println("---------- Usuario ----------");
 					System.out.println(usuario.getValue());
 					System.out.println("-----------------------------");
