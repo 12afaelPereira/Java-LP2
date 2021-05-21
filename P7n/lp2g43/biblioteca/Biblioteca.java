@@ -19,7 +19,7 @@ public class Biblioteca{
     protected Hashtable<String, Livro> cadastroDelivros = null;
     protected ArrayList<String> livrosOrdenados = new ArrayList<String>();
     protected ArrayList<String> usuariosOrdenados = new ArrayList<String>();
-    //protected Calendar dataDeEmprestimo = null;
+    protected Calendar dataDeEmprestimo = null;
     protected Calendar diasComOLivro = null;
     protected Calendar dataDeDevolucao = null;
 
@@ -90,14 +90,25 @@ public class Biblioteca{
     }
 
     public void emprestaLivro(Usuario usuario, Livro livro){
-    	//dataDeEmprestimo = Calendar.getInstance();
+    	dataDeEmprestimo = Calendar.getInstance();
     	dataDeDevolucao = Calendar.getInstance();
     	
     	// adicionando 7 dias a data atual
     	dataDeDevolucao.add(Calendar.DATE, 7);
 
     	livro.empresta();
-    	usuario.addLivroHist(Calendar.DATE, Calendar.MONTH, Calendar.YEAR, 
+    	
+    	livro.addUsuarioHist(dataDeEmprestimo.get(Calendar.DATE), 
+							dataDeEmprestimo.get(Calendar.MONTH), 
+							dataDeEmprestimo.get(Calendar.YEAR), 
+							dataDeDevolucao.get(Calendar.DATE), 
+                            dataDeDevolucao.get(Calendar.MONTH), 
+                            dataDeDevolucao.get(Calendar.YEAR), 
+                            usuario.getCodigoUsuario());
+    	
+    	usuario.addLivroHist(dataDeEmprestimo.get(Calendar.DATE), 
+    						dataDeEmprestimo.get(Calendar.MONTH), 
+    						dataDeEmprestimo.get(Calendar.YEAR), 
                             dataDeDevolucao.get(Calendar.DATE), 
                             dataDeDevolucao.get(Calendar.MONTH), 
                             dataDeDevolucao.get(Calendar.YEAR), 

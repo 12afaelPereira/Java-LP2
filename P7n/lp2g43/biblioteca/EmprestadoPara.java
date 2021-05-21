@@ -1,5 +1,6 @@
 package lp2g43.biblioteca;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class EmprestadoPara{
@@ -47,7 +48,11 @@ public class EmprestadoPara{
 	@Override
 	public String toString() {
 		return "Codigo do usuario: " + getCodigoDoUsuario() + System.lineSeparator()
-			+ "Data do emprestimo: " + getDataDoEmprestimo() + System.lineSeparator()
-			+ "Datat da devolucao: " + getDataDeDevolucao() + System.lineSeparator();
+			+ "Data do emprestimo: " + getDataDoEmprestimo().get(Calendar.DATE) + "/" 
+									+ (getDataDoEmprestimo().get(Calendar.MONTH)+1) + "/" 
+									+ getDataDoEmprestimo().get(Calendar.YEAR) + System.lineSeparator()
+			+ "Data da devolucao: " + getDataDeDevolucao().get(Calendar.DATE) + "/"
+									+ (getDataDeDevolucao().get(Calendar.MONTH)+1) + "/"
+									+ getDataDeDevolucao().get(Calendar.YEAR) + System.lineSeparator();
 	}
 }

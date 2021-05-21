@@ -285,27 +285,36 @@ public class P7nX {
 
 	public static void fazerEmprestimo() {
 
-		/*
-		 * String codLivro = ""; int codUsuario = 0;
-		 * 
-		 * while (true) { System.out.println("Codigo do livro a ser emprestado: ");
-		 * codLivro = entrada.nextLine();
-		 * 
-		 * if (biblioteca.getLivro(codLivro) != null) { break; } else {
-		 * System.out.println("Codigo nao existente!"); } }
-		 * 
-		 * while(true) {
-		 * System.out.println("Codigo do usuario para quem sera emprestado: ");
-		 * codUsuario = Integer.parseInt(entrada.nextLine());
-		 * 
-		 * if (biblioteca.getUsuario(codUsuario) != null) { break; } else {
-		 * System.out.println("Codigo nao existente!"); }
-		 * 
-		 * }
-		 * 
-		 * biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario),
-		 * biblioteca.getLivro(codLivro));
-		 */
+		String codLivro = "";
+		int codUsuario = 0;
+
+		while (true) {
+			System.out.println("Codigo do livro a ser emprestado: ");
+			codLivro = entrada.nextLine();
+
+			if (biblioteca.getLivro(codLivro) != null) {
+				break;
+			} else {
+				System.out.println("Codigo nao existente!");
+			}
+		}
+
+		while (true) {
+			System.out.println("Codigo do usuario para quem sera emprestado: ");
+			codUsuario = Integer.parseInt(entrada.nextLine());
+
+			if (biblioteca.getUsuario(codUsuario) != null) {
+				break;
+			} else {
+				System.out.println("Codigo nao existente!");
+			}
+
+		}
+
+		biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
+		
+		System.out.println("Emprestimo feito!");
+
 	}
 
 	private static void relatorio() {
