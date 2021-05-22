@@ -20,8 +20,10 @@ public class Biblioteca{
     protected ArrayList<String> livrosOrdenados = new ArrayList<String>();
     protected ArrayList<String> usuariosOrdenados = new ArrayList<String>();
     protected Calendar dataDeEmprestimo = null;
-    protected Calendar diasComOLivro = null;
     protected Calendar dataDeDevolucao = null;
+    protected Calendar dataPrevistaDeDevolucao = null;
+    protected Long milliseconds = null;
+    protected int diasComOLivro = 0;
 
 
     public Biblioteca(Hashtable<Integer, Usuario> cadastroDeUsuarios, Hashtable<String, Livro> cadastroDelivros){
@@ -91,10 +93,10 @@ public class Biblioteca{
 
     public void emprestaLivro(Usuario usuario, Livro livro){
     	dataDeEmprestimo = Calendar.getInstance();
-    	dataDeDevolucao = Calendar.getInstance();
+    	dataPrevistaDeDevolucao = Calendar.getInstance();
     	
     	// adicionando 7 dias a data atual
-    	dataDeDevolucao.add(Calendar.DATE, 7);
+    	dataPrevistaDeDevolucao.add(Calendar.DATE, 7);
 
     	try {
 			livro.empresta();
@@ -102,17 +104,17 @@ public class Biblioteca{
 			livro.addUsuarioHist(dataDeEmprestimo.get(Calendar.DATE), 
 					dataDeEmprestimo.get(Calendar.MONTH), 
 					dataDeEmprestimo.get(Calendar.YEAR), 
-					dataDeDevolucao.get(Calendar.DATE), 
-                    dataDeDevolucao.get(Calendar.MONTH), 
-                    dataDeDevolucao.get(Calendar.YEAR), 
+					dataPrevistaDeDevolucao.get(Calendar.DATE), 
+                    dataPrevistaDeDevolucao.get(Calendar.MONTH), 
+                    dataPrevistaDeDevolucao.get(Calendar.YEAR), 
                     usuario.getCodigoUsuario());
 
 			usuario.addLivroHist(dataDeEmprestimo.get(Calendar.DATE), 
 					dataDeEmprestimo.get(Calendar.MONTH), 
 					dataDeEmprestimo.get(Calendar.YEAR), 
-                    dataDeDevolucao.get(Calendar.DATE), 
-                    dataDeDevolucao.get(Calendar.MONTH), 
-                    dataDeDevolucao.get(Calendar.YEAR), 
+                    dataPrevistaDeDevolucao.get(Calendar.DATE), 
+                    dataPrevistaDeDevolucao.get(Calendar.MONTH), 
+                    dataPrevistaDeDevolucao.get(Calendar.YEAR), 
                     livro.getCodigoLivro());
 			
 			System.out.println("Emprestimo feito!");
@@ -125,26 +127,28 @@ public class Biblioteca{
     }
 
     public void devolveLivro(Usuario usuario, Livro livro){
-        
+        dataDeDevolucao = Calendar.getInstance();
+    	
     	try {
 			livro.devolve();
 			
 			for(Emprestimo emprestimo : usuario.getHistorico()) {
 				if(emprestimo.codigoDoLivro.contains(livro.getCodigoLivro())) {
 					
-					diasComOLivro.setTimeInMillis(emprestimo.getDataDeDevolucao().getTimeInMillis() - emprestimo.getDataDoEmprestimo().getTimeInMillis());
-					
-					//int days = (int) (diasComOLivro / (1000*60*60*24));
+					milliseconds = emprestimo.getDataDeDevolucao().getTimeInMillis() - dataDeDevolucao.getTimeInMillis();
+					diasComOLivro = (int)(milliseconds / (1000*60*60*24));
 					
 					livro.addUsuarioHist(emprestimo.getDataDoEmprestimo().get(Calendar.DATE), 
 							emprestimo.getDataDoEmprestimo().get(Calendar.MONTH), 
 							emprestimo.getDataDoEmprestimo().get(Calendar.YEAR), 
-							Calendar.DATE, Calendar.MONTH, Calendar.YEAR, 
+							dataDeDevolucao.get(Calendar.DATE), 
+							dataDeDevolucao.get(Calendar.MONTH), 
+							dataDeDevolucao.get(Calendar.YEAR),
 							usuario.getCodigoUsuario());
 				}
 			}
 			
-			if(diasComOLivro.get(Calendar.DATE) > 7) {
+			if(diasComOLivro > 7) {
 				System.out.println("Livro devolvido! <<Atencao!!>> Multa por atraso!");
 			}
 			else {
@@ -204,12 +208,12 @@ public class Biblioteca{
 		return cadastroDelivros;
 	}
 
-	public Calendar getDiasComOLivro() {
+	public int getDiasComOLivro() {
 		return diasComOLivro;
 	}
 
 	public Calendar getDataDeDevolucao() {
-		return dataDeDevolucao;
+		return dataPrevistaDeDevolucao;
 	}
     
     
