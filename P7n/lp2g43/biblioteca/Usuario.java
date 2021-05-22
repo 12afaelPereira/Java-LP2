@@ -54,7 +54,7 @@ public class Usuario extends Pessoa implements Serializable{
 	public String toString() {
         return super.toString() 
         		+ "Codigo do usuario: "  + getCodigoUsuario() + System.lineSeparator()
-        		+ "Endereco: " + getEndereco()
+        		+ "Endereco: " + getEndereco() + System.lineSeparator()
         		+ "Historico: " + getHistorico().toString();
 	}
 }

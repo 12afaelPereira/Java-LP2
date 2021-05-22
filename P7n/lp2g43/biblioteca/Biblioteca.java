@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
@@ -22,8 +23,8 @@ public class Biblioteca{
     protected Calendar dataDeEmprestimo = null;
     protected Calendar dataDeDevolucao = null;
     protected Calendar dataPrevistaDeDevolucao = null;
-    protected Long milliseconds = null;
-    protected int diasComOLivro = 0;
+    protected long milliseconds = 0;
+    protected int diasComOLivro = 2;
 
 
     public Biblioteca(Hashtable<Integer, Usuario> cadastroDeUsuarios, Hashtable<String, Livro> cadastroDelivros){
@@ -128,6 +129,10 @@ public class Biblioteca{
 
     public void devolveLivro(Usuario usuario, Livro livro){
         dataDeDevolucao = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        
+        String dDevolucao = null;
+		String dEmprestimo = null;
     	
     	try {
 			livro.devolve();
@@ -135,8 +140,14 @@ public class Biblioteca{
 			for(Emprestimo emprestimo : usuario.getHistorico()) {
 				if(emprestimo.codigoDoLivro.contains(livro.getCodigoLivro())) {
 					
-					milliseconds = emprestimo.getDataDeDevolucao().getTimeInMillis() - dataDeDevolucao.getTimeInMillis();
+					//
+					dDevolucao = df.format(dataDeDevolucao.getTime());
+					dEmprestimo = df.format(emprestimo.getDataDoEmprestimo().getTime());
+					//
+					 
+					milliseconds = dataDeDevolucao.getTimeInMillis() - emprestimo.getDataDoEmprestimo().getTimeInMillis();
 					diasComOLivro = (int)(milliseconds / (1000*60*60*24));
+
 					
 					livro.addUsuarioHist(emprestimo.getDataDoEmprestimo().get(Calendar.DATE), 
 							emprestimo.getDataDoEmprestimo().get(Calendar.MONTH), 
@@ -148,8 +159,16 @@ public class Biblioteca{
 				}
 			}
 			
+			System.out.println("------------------------------------");
+			System.out.println("Data de devolucao: " + dDevolucao);
+			System.out.println("Data de Emprestimo: " + dEmprestimo);
+			System.out.println("Dias com o livro: " + diasComOLivro);
+			System.out.println("------------------------------------");
+			//
+			
 			if(diasComOLivro > 7) {
 				System.out.println("Livro devolvido! <<Atencao!!>> Multa por atraso!");
+				System.out.println("------------------------------------------------");
 			}
 			else {
 				System.out.println("Devolvido!");
