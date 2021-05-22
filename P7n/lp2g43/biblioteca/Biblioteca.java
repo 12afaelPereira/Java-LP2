@@ -118,7 +118,7 @@ public class Biblioteca{
                     dataPrevistaDeDevolucao.get(Calendar.YEAR), 
                     livro.getCodigoLivro());
 			
-			System.out.println("Emprestimo feito!");
+			System.out.println("Emprestimo feito! \n");
 		} 
     	catch (CopiaNaoDisponivelEx e) {
 			System.out.println(e.getMessage());
@@ -159,21 +159,25 @@ public class Biblioteca{
 				}
 			}
 			
-			System.out.println("------------------------------------");
-			System.out.println("Data de devolucao: " + dDevolucao);
-			System.out.println("Data de Emprestimo: " + dEmprestimo);
-			System.out.println("Dias com o livro: " + diasComOLivro);
-			System.out.println("------------------------------------");
-			//
-			
-			if(diasComOLivro > 7) {
-				System.out.println("Livro devolvido! <<Atencao!!>> Multa por atraso!");
-				System.out.println("------------------------------------------------");
+			//Se o usuario for o correto a devolver o livro
+			if(dDevolucao != null && dEmprestimo !=null) {
+				System.out.println("------------------------------------");
+				System.out.println("Data de devolucao: " + dDevolucao);
+				System.out.println("Data de Emprestimo: " + dEmprestimo);
+				System.out.println("Dias com o livro: " + diasComOLivro);
+				System.out.println("------------------------------------");				
+
+				if(diasComOLivro > 7) {
+					System.out.println("Livro devolvido! <<Atencao!!>> Multa por atraso!");
+					System.out.println("------------------------------------------------");
+				}
+				else {
+					System.out.println("Devolvido! \n");
+				}
 			}
 			else {
-				System.out.println("Devolvido!");
+				System.out.println("<<Atencao!!>> Usuario incorreto. Este usuario nao pegou este livro");
 			}
-			
 		} 
     	catch (NenhumaCopiaEmprestadaEx e) {
     		System.out.println(e.getMessage());

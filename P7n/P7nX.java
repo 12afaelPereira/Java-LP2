@@ -335,10 +335,10 @@ public class P7nX {
 			System.out.println("Codigo do usuario a devolver o livro: ");
 			codUsuario = Integer.parseInt(entrada.nextLine());
 
-			if (biblioteca.getUsuario(codUsuario) != null) {
+			if (biblioteca.getUsuario(codUsuario) != null ) {
 				break;
 			} else {
-				System.out.println("Codigo  de usuario nao existente!");
+				System.out.println("Codigo de usuario nao existente!");
 			}
 
 		}
@@ -438,7 +438,7 @@ public class P7nX {
 
 			break;
 		case "3":
-			System.out.println("-- Voltando pro menu");
+			System.out.println("-- Voltando pro menu \n");
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
@@ -501,7 +501,7 @@ public class P7nX {
 			}
 			break;
 		case "3":
-			System.out.println("-- Voltando pro menu");
+			System.out.println("-- Voltando pro menu \n");
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
