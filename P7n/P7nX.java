@@ -37,6 +37,10 @@ public class P7nX {
 	
 	static File usuariosCadastrados = null;
 	static File livrosCadastrados = null;
+	
+	static String arquivoCadastroDeUsuarios =  "cadastroDeUsuarios";
+	static String arquivoCadastroDeLivros =  "cadastroDeLivros";
+	
 	static Hashtable<Integer, Usuario> cadastroDeUsuarios = null;
 	static Hashtable<String, Livro> cadastroDeLivros = null;
 	static Biblioteca biblioteca = null;
@@ -145,8 +149,6 @@ public class P7nX {
 	}
 	
 	private static void abrirArquivos() {
-		String arquivoCadastroDeUsuarios =  "";
-		String arquivoCadastroDeLivros =  "";
 		
 		System.out.println("Digite o nome do arquivo de cadastro de usuarios para abrir: ");
 		arquivoCadastroDeUsuarios = entrada.nextLine();
@@ -187,13 +189,23 @@ public class P7nX {
 	private static void salvarArquivos() {
 		String entradaSalvarArquivos = "";
 		
+		System.out.println("\n--------------------- ATENCAO ---------------------");
+		System.out.println("| Cuiado para nao sobrescrever os arquivos atuais ! |");
+		System.out.println("----------------------------------------------------- \n");
+		
+		
 		while(!entradaSalvarArquivos.toLowerCase().equals("s") && !entradaSalvarArquivos.toLowerCase().equals("n")) {
-			System.out.println("Deseja salvar os arquivos atuais? (s/n)");
+			System.out.println("Deseja salvar os arquivos atuais ("+ arquivoCadastroDeUsuarios +" e " + arquivoCadastroDeLivros + ")? (s/n)");
 			entradaSalvarArquivos = entrada.nextLine();
 		}
 		
-		System.out.println("Salvando...");
-		
+		if(entradaSalvarArquivos.toLowerCase().equals("s")) {
+			biblioteca.salvaArquivo(cadastroDeUsuarios, arquivoCadastroDeUsuarios);
+			biblioteca.salvaArquivo(cadastroDeLivros, arquivoCadastroDeLivros);
+			
+			System.out.println("Salvando...");			
+		}
+		System.out.println("\n");
 	}
 
 
