@@ -156,42 +156,52 @@ public class P7nX {
 		System.out.println("Digite o nome do arquivo de cadastro de livros para abrir: ");
 		arquivoCadastroDeLivros = entrada.nextLine();
 		
-		try{
-            streamDoArquivo = new FileInputStream(arquivoCadastroDeUsuarios);
-            arquivo = new ObjectInputStream(streamDoArquivo);
+		usuariosCadastrados = new File(arquivoCadastroDeUsuarios);
+		livrosCadastrados = new File(arquivoCadastroDeLivros);
+		
+		if (usuariosCadastrados.exists() && livrosCadastrados.exists()) {
+			
+			try{
+	            streamDoArquivo = new FileInputStream(arquivoCadastroDeUsuarios);
+	            arquivo = new ObjectInputStream(streamDoArquivo);
 
-        	cadastroDeUsuarios = (Hashtable<Integer, Usuario>) arquivo.readObject();
-        	
-        	arquivo.close();
-        	streamDoArquivo.close();
-            
-        	
-        	streamDoArquivo = new FileInputStream(arquivoCadastroDeLivros);
-            arquivo = new ObjectInputStream(streamDoArquivo);
-            
-        	cadastroDeLivros = (Hashtable<String, Livro>) arquivo.readObject();
-        	
-        	arquivo.close();
-        	streamDoArquivo.close();
-            
-        	
-        	biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
-        	
-        	System.out.println("Arquivos Carregados!  \n");
-        }
-        catch(IOException | ClassNotFoundException e){
-            System.out.println("Ocorreu um erro");
-            e.printStackTrace();
-        }
+	        	cadastroDeUsuarios = (Hashtable<Integer, Usuario>) arquivo.readObject();
+	        	
+	        	arquivo.close();
+	        	streamDoArquivo.close();
+	            
+	        	
+	        	streamDoArquivo = new FileInputStream(arquivoCadastroDeLivros);
+	            arquivo = new ObjectInputStream(streamDoArquivo);
+	            
+	        	cadastroDeLivros = (Hashtable<String, Livro>) arquivo.readObject();
+	        	
+	        	arquivo.close();
+	        	streamDoArquivo.close();
+	            
+	        	
+	        	biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
+	        	
+	        	System.out.println("Arquivos Carregados!  \n");
+	        }
+	        catch(IOException | ClassNotFoundException e){
+	            System.out.println("Ocorreu um erro");
+	            e.printStackTrace();
+	        }
+			
+		}
+		else {
+			System.out.println("Arquivo inexistente! verifique se o arquivo foi criado ou se esta no diretorio correto. ");
+		}
 		
 	}
 	
 	private static void salvarArquivos() {
 		String entradaSalvarArquivos = "";
 		
-		System.out.println("\n--------------------- ATENCAO ---------------------");
-		System.out.println("| Cuiado para nao sobrescrever os arquivos atuais ! |");
-		System.out.println("----------------------------------------------------- \n");
+		System.out.println("\n-------------------------- ATENCAO --------------------------");
+		System.out.println("| Cuiado para nao sobrescrever sem querer os arquivos atuais ! |");
+		System.out.println("--------------------------------------------------------------- \n");
 		
 		
 		while(!entradaSalvarArquivos.toLowerCase().equals("s") && !entradaSalvarArquivos.toLowerCase().equals("n")) {
