@@ -44,9 +44,11 @@ public class P7nX {
 			case "1":
 				// Manutencao
 				System.out.println("-- Manutencao");
+				manutencao();
 				break;
 			case "2":
 				// Cadastro
+				System.out.println("-- Cadastro");
 				cadastro();
 				break;
 			case "3":
@@ -72,6 +74,47 @@ public class P7nX {
 
 	}
 
+	private static void manutencao() {
+		String entradaManutencao = "";
+
+		System.out.println("  ***********************");
+		System.out.println("  * 1 - Criar arquivos  *");
+		System.out.println("  * 2 - Abrir arquivos  *");
+		System.out.println("  * 3 - Salvar arquivos *");
+		System.out.println("  * 4 - Voltar ao menu  *");
+		System.out.println("  ***********************");
+
+		entradaManutencao = entrada.nextLine();
+
+		switch (entradaManutencao) {
+		case "1":
+			System.out.println("-- Criar Arquivos");
+			criarArquivos();
+			break;
+		case "2":
+			System.out.println("-- Abrir arquivos");
+			cadastrarLivro();
+			break;
+		case "3":
+			System.out.println("-- Salvar arquivos");
+			salvarCadastro();
+			break;
+		case "4":
+			System.out.println("-- Voltar");
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			cadastro();
+			break;
+		}
+		
+	}
+
+	private static void criarArquivos() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static void checkFile() {
 		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables
 		// zerados
@@ -83,6 +126,11 @@ public class P7nX {
 			biblioteca = new Biblioteca("CadastroDeUsuarios", "CadastroDeLivros");
 			cadastroDeLivros = biblioteca.getCadastroDelivros();
 			cadastroDeUsuarios = biblioteca.getCadastroDeUsuarios();
+			
+			System.out.println("\n---------------------- ATENCAO ----------------------");
+			System.out.println("| Arquivos padrao carregados ('CadastroDeUsuarios' e 'CadastroDeLivros')");
+			System.out.println("| Carregue novos arquivos na secao 'Manutencao'");
+			System.out.println("------------------------------------------------------- \n");
 		} else {
 			cadastroDeLivros = new Hashtable<String, Livro>();
 			cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
@@ -112,7 +160,6 @@ public class P7nX {
 	public static void cadastro() {
 		String entradaCadastro = "";
 
-		System.out.println("-- Cadastro");
 		System.out.println("  *************************");
 		System.out.println("  * 1 - Cadastrar Usuario *");
 		System.out.println("  * 2 - Cadastrar Livro   *");
@@ -316,7 +363,6 @@ public class P7nX {
 	}
 	
 	public static void devolucao() {
-		// TODO Auto-generated method stub
 		String codLivro = "";
 		int codUsuario = 0;
 
@@ -396,7 +442,7 @@ public class P7nX {
 		System.out.println("  *****************************");
 		System.out.println("  * 1 - listar pelo codigo    *");
 		System.out.println("  * 2 - Listar pelo titulo    *");
-		System.out.println("  * 3 - Voltar ao menu        *");
+		System.out.println("  * 3 - Voltar                *");
 		System.out.println("  *****************************");
 
 		entradaDetalhesLivro = entrada.nextLine();
@@ -438,7 +484,8 @@ public class P7nX {
 
 			break;
 		case "3":
-			System.out.println("-- Voltando pro menu \n");
+			System.out.println("-- Relatorios ");
+			relatorio();
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
@@ -455,7 +502,7 @@ public class P7nX {
 		System.out.println("  *****************************");
 		System.out.println("  * 1 - listar pelo codigo    *");
 		System.out.println("  * 2 - Listar pelo nome      *");
-		System.out.println("  * 3 - Voltar ao menu        *");
+		System.out.println("  * 3 - Voltar                *");
 		System.out.println("  *****************************");
 
 		entradaDetalhesUsuario = entrada.nextLine();
@@ -501,7 +548,8 @@ public class P7nX {
 			}
 			break;
 		case "3":
-			System.out.println("-- Voltando pro menu \n");
+			System.out.println("-- Relatorios ");
+			relatorio();
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
