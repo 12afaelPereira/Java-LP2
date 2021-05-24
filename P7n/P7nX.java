@@ -1,4 +1,7 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
@@ -29,6 +32,11 @@ public class P7nX {
 	static int livrosEmprestados = 0;
 	static ArrayList<EmprestadoPara> historicoLivro = new ArrayList<EmprestadoPara>();
 
+	static FileInputStream streamDoArquivo = null;
+	static ObjectInputStream arquivo = null;
+	
+	static File usuariosCadastrados = null;
+	static File livrosCadastrados = null;
 	static Hashtable<Integer, Usuario> cadastroDeUsuarios = null;
 	static Hashtable<String, Livro> cadastroDeLivros = null;
 	static Biblioteca biblioteca = null;
@@ -93,11 +101,11 @@ public class P7nX {
 			break;
 		case "2":
 			System.out.println("-- Abrir arquivos");
-			cadastrarLivro();
+			abrirArquivos();
 			break;
 		case "3":
 			System.out.println("-- Salvar arquivos");
-			salvarCadastro();
+			salvarArquivos();
 			break;
 		case "4":
 			System.out.println("-- Voltar");
@@ -110,17 +118,91 @@ public class P7nX {
 		
 	}
 
+
 	private static void criarArquivos() {
-		// TODO Auto-generated method stub
+		String arquivoCadastroDeUsuarios =  "";
+		String arquivoCadastroDeLivros =  "";
+		
+		System.out.println("Digite o nome do arquivo para guardar o cadastro de usuarios: ");
+		arquivoCadastroDeUsuarios = entrada.nextLine();
+		
+		System.out.println("Digite o nome do arquivo para guardar o cadastro de livros: ");
+		arquivoCadastroDeLivros = entrada.nextLine();
+		
+		System.out.println("Arquivo criado!");
+		
+		cadastroDeLivros = new Hashtable<String, Livro>();
+		cadastroDeUsuarios = new Hashtable<Integer, Usuario>();
+		
+		biblioteca.salvaArquivo(cadastroDeUsuarios, arquivoCadastroDeUsuarios);
+		biblioteca.salvaArquivo(cadastroDeLivros, arquivoCadastroDeLivros);
+		
+		System.out.println("\n");
+		
+		biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
+		
+		System.out.println("Agora voce esta trabalhando com os arquivos '"+ arquivoCadastroDeUsuarios +"' e '"+ arquivoCadastroDeLivros +"' \n");
+	}
+	
+	private static void abrirArquivos() {
+		String arquivoCadastroDeUsuarios =  "";
+		String arquivoCadastroDeLivros =  "";
+		
+		System.out.println("Digite o nome do arquivo de cadastro de usuarios para abrir: ");
+		arquivoCadastroDeUsuarios = entrada.nextLine();
+		
+		System.out.println("Digite o nome do arquivo de cadastro de livros para abrir: ");
+		arquivoCadastroDeLivros = entrada.nextLine();
+		
+		try{
+            streamDoArquivo = new FileInputStream(arquivoCadastroDeUsuarios);
+            arquivo = new ObjectInputStream(streamDoArquivo);
+
+        	cadastroDeUsuarios = (Hashtable<Integer, Usuario>) arquivo.readObject();
+        	
+        	arquivo.close();
+        	streamDoArquivo.close();
+            
+        	
+        	streamDoArquivo = new FileInputStream(arquivoCadastroDeLivros);
+            arquivo = new ObjectInputStream(streamDoArquivo);
+            
+        	cadastroDeLivros = (Hashtable<String, Livro>) arquivo.readObject();
+        	
+        	arquivo.close();
+        	streamDoArquivo.close();
+            
+        	
+        	biblioteca = new Biblioteca(cadastroDeUsuarios, cadastroDeLivros);
+        	
+        	System.out.println("Arquivos Carregados!  \n");
+        }
+        catch(IOException | ClassNotFoundException e){
+            System.out.println("Ocorreu um erro");
+            e.printStackTrace();
+        }
 		
 	}
+	
+	private static void salvarArquivos() {
+		String entradaSalvarArquivos = "";
+		
+		while(!entradaSalvarArquivos.toLowerCase().equals("s") && !entradaSalvarArquivos.toLowerCase().equals("n")) {
+			System.out.println("Deseja salvar os arquivos atuais? (s/n)");
+			entradaSalvarArquivos = entrada.nextLine();
+		}
+		
+		System.out.println("Salvando...");
+		
+	}
+
 
 	public static void checkFile() {
 		// Se os arquivos existirem carrega nos hashtables - senao cria hashtables
 		// zerados
 
-		File usuariosCadastrados = new File("CadastroDeUsuarios");
-		File livrosCadastrados = new File("CadastroDeLivros");
+		usuariosCadastrados = new File("CadastroDeUsuarios");
+		livrosCadastrados = new File("CadastroDeLivros");
 
 		if (usuariosCadastrados.exists() && livrosCadastrados.exists()) {
 			biblioteca = new Biblioteca("CadastroDeUsuarios", "CadastroDeLivros");
