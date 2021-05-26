@@ -14,6 +14,7 @@ public class Usuario extends Pessoa implements Serializable{
     protected String endereco = "";
     protected int codigoUsuario = 0;
 	protected ArrayList<Emprestimo> historico = new ArrayList<Emprestimo>();
+	//public ArrayList<String> livrosComOUsuario = new ArrayList<String>();
 
 
     public Usuario(String nome, int dia, int mes, int ano, String endereco, int codigoUsuario, ArrayList<Emprestimo> historico){
@@ -44,6 +45,21 @@ public class Usuario extends Pessoa implements Serializable{
     public String getEndereco() {
 		return endereco;
 	}
+    
+    
+
+	/*
+	 * public ArrayList<String> getLivrosComOUsuario() { return livrosComOUsuario; }
+	 * 
+	 * public void addLivrosComOUsuario(String codigoDoLivro) {
+	 * 
+	 * livrosComOUsuario.add(codigoDoLivro); }
+	 * 
+	 * public void removeLivrosComOUsuario(String codigoDoLivro) {
+	 * 
+	 * livrosComOUsuario.remove(new String(codigoDoLivro)); }
+	 */
+
 
 	public ArrayList<Emprestimo> getHistorico() {
 		return historico;

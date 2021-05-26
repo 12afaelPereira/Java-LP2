@@ -12,7 +12,9 @@ import lp2g43.biblioteca.Biblioteca;
 import lp2g43.biblioteca.EmprestadoPara;
 import lp2g43.biblioteca.Emprestimo;
 import lp2g43.biblioteca.Livro;
+import lp2g43.biblioteca.LivroNaoCadastradoEx;
 import lp2g43.biblioteca.Usuario;
+import lp2g43.biblioteca.UsuarioNaoCadastradoEx;
 
 public class P7nX {
 	static Scanner entrada = new Scanner(System.in);
@@ -424,7 +426,6 @@ public class P7nX {
 			break;
 		case "4":
 			System.out.println("-- Voltando pro menu");
-			detalhesLivro();
 			break;
 		default:
 			System.out.println("Digite uma opcao valida!");
@@ -444,10 +445,11 @@ public class P7nX {
 			System.out.println("Codigo do livro a ser emprestado: ");
 			codLivro = entrada.nextLine();
 
-			if (biblioteca.getLivro(codLivro) != null) {
+			try {
+				biblioteca.getLivro(codLivro);
 				break;
-			} else {
-				System.out.println("Codigo de livro nao existente!");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 
@@ -455,15 +457,19 @@ public class P7nX {
 			System.out.println("Codigo do usuario para quem sera emprestado: ");
 			codUsuario = Integer.parseInt(entrada.nextLine());
 
-			if (biblioteca.getUsuario(codUsuario) != null) {
+			try {
+				biblioteca.getUsuario(codUsuario);
 				break;
-			} else {
-				System.out.println("Codigo  de usuario nao existente!");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-
 		}
 
-		biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
+		try {
+			biblioteca.emprestaLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
+		} catch (UsuarioNaoCadastradoEx | LivroNaoCadastradoEx e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void devolucao() {
@@ -474,10 +480,11 @@ public class P7nX {
 			System.out.println("Codigo do livro a ser devolvido: ");
 			codLivro = entrada.nextLine();
 
-			if (biblioteca.getLivro(codLivro) != null) {
+			try {
+				biblioteca.getLivro(codLivro);
 				break;
-			} else {
-				System.out.println("Codigo de livro nao existente!");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 
@@ -485,15 +492,20 @@ public class P7nX {
 			System.out.println("Codigo do usuario a devolver o livro: ");
 			codUsuario = Integer.parseInt(entrada.nextLine());
 
-			if (biblioteca.getUsuario(codUsuario) != null ) {
+			try {
+				biblioteca.getUsuario(codUsuario);
 				break;
-			} else {
-				System.out.println("Codigo de usuario nao existente!");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 
 		}
 
-		biblioteca.devolveLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
+		try {
+			biblioteca.devolveLivro(biblioteca.getUsuario(codUsuario), biblioteca.getLivro(codLivro));
+		} catch (UsuarioNaoCadastradoEx | LivroNaoCadastradoEx e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	
@@ -539,6 +551,72 @@ public class P7nX {
 			break;
 		}
 	}
+	
+	public static void detalhesUsuario() {
+		String entradaDetalhesUsuario = "";
+
+		System.out.println("  *****************************");
+		System.out.println("  * 1 - listar pelo codigo    *");
+		System.out.println("  * 2 - Listar pelo nome      *");
+		System.out.println("  * 3 - Voltar                *");
+		System.out.println("  *****************************");
+
+		entradaDetalhesUsuario = entrada.nextLine();
+
+		switch (entradaDetalhesUsuario) {
+		case "1":
+			System.out.println("-- Lista pelo codigo");
+
+			int codUsuario = 0;
+
+			System.out.println("Digite o codigo do usuario (inteiro)");
+
+			try {
+				codUsuario = Integer.parseInt(entrada.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("Digite um numero inteiro!");
+			}
+
+
+			try {
+				System.out.println("---------- Usuario ----------");
+				System.out.println(biblioteca.getUsuario(codUsuario));
+				System.out.println("-----------------------------");
+				
+			} catch (UsuarioNaoCadastradoEx e) {
+				System.out.println(e.getMessage());
+			}
+			
+
+			break;
+		case "2":
+			System.out.println("-- Lista pelo nome");
+
+			String nomeUsuario = "";
+
+			System.out.println("Digite o nome do usuario");
+			nomeUsuario = entrada.nextLine();
+
+			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
+
+				if (usuario.getValue().getNome().toLowerCase().equals(nomeUsuario.toLowerCase())) {
+					System.out.println("---------- Usuario ----------");
+					System.out.println(usuario.getValue());
+					System.out.println("-----------------------------");
+				}
+			}
+			break;
+		case "3":
+			System.out.println("-- Relatorios ");
+			relatorio();
+			break;
+		default:
+			System.out.println("Digite uma opcao valida!");
+			detalhesUsuario();
+			break;
+		}
+
+	}
 
 	public static void detalhesLivro() {
 		String entradaDetalhesLivro = "";
@@ -560,12 +638,13 @@ public class P7nX {
 			System.out.println("Digite o codigo do livro");
 			codLivro = entrada.nextLine();
 
-			if (biblioteca.getLivro(codLivro) == null) {
-				System.out.println("O codigo " + codLivro + " nao existe!");
-			} else {
+			try {
 				System.out.println("----------- Livro -----------");
 				System.out.println(biblioteca.getLivro(codLivro));
 				System.out.println("-----------------------------");
+				
+			} catch (LivroNaoCadastradoEx e) {
+				System.out.println(e.getMessage());
 			}
 
 			break;
@@ -599,68 +678,6 @@ public class P7nX {
 
 	}
 
-	public static void detalhesUsuario() {
-
-		String entradaDetalhesUsuario = "";
-
-		System.out.println("  *****************************");
-		System.out.println("  * 1 - listar pelo codigo    *");
-		System.out.println("  * 2 - Listar pelo nome      *");
-		System.out.println("  * 3 - Voltar                *");
-		System.out.println("  *****************************");
-
-		entradaDetalhesUsuario = entrada.nextLine();
-
-		switch (entradaDetalhesUsuario) {
-		case "1":
-			System.out.println("-- Lista pelo codigo");
-
-			int codUsuario = 0;
-
-			System.out.println("Digite o codigo do usuario (inteiro)");
-
-			try {
-				codUsuario = Integer.parseInt(entrada.nextLine());
-			} catch (NumberFormatException e) {
-				System.out.println("Digite um numero inteiro!");
-			}
-
-			if (biblioteca.getUsuario(codUsuario) == null) {
-				System.out.println("O codigo " + codUsuario + " nao existe!");
-			} else {
-				System.out.println("---------- Usuario ----------");
-				System.out.println(biblioteca.getUsuario(codUsuario));
-				System.out.println("-----------------------------");
-			}
-
-			break;
-		case "2":
-			System.out.println("-- Lista pelo nome");
-
-			String nomeUsuario = "";
-
-			System.out.println("Digite o nome do usuario");
-			nomeUsuario = entrada.nextLine();
-
-			for (Entry<Integer, Usuario> usuario : biblioteca.getCadastroDeUsuarios().entrySet()) {
-
-				if (usuario.getValue().getNome().toLowerCase().equals(nomeUsuario.toLowerCase())) {
-					System.out.println("---------- Usuario ----------");
-					System.out.println(usuario.getValue());
-					System.out.println("-----------------------------");
-				}
-			}
-			break;
-		case "3":
-			System.out.println("-- Relatorios ");
-			relatorio();
-			break;
-		default:
-			System.out.println("Digite uma opcao valida!");
-			detalhesUsuario();
-			break;
-		}
-
-	}
+	
 
 }

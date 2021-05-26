@@ -20,6 +20,7 @@ public class Biblioteca{
     protected Hashtable<String, Livro> cadastroDelivros = null;
     protected ArrayList<String> livrosOrdenados = new ArrayList<String>();
     protected ArrayList<String> usuariosOrdenados = new ArrayList<String>();
+    protected ArrayList<Emprestimo> historico = null;
     protected Calendar dataDeEmprestimo = null;
     protected Calendar dataDeDevolucao = null;
     protected Calendar dataPrevistaDeDevolucao = null;
@@ -101,6 +102,8 @@ public class Biblioteca{
 
     	try {
 			livro.empresta();
+			//usuario.addLivrosComOUsuario(livro.getCodigoLivro());
+			//usuario.addLivrosComOUsuario(livro.getCodigoLivro());
 			
 			livro.addUsuarioHist(dataDeEmprestimo.get(Calendar.DATE), 
 					dataDeEmprestimo.get(Calendar.MONTH), 
@@ -134,7 +137,7 @@ public class Biblioteca{
         String dDevolucao = null;
 		String dEmprestimo = null;
     	
-    	try {
+		try {
 			livro.devolve();
 			
 			for(Emprestimo emprestimo : usuario.getHistorico()) {
@@ -215,12 +218,23 @@ public class Biblioteca{
         return usuariosOrdenados.toString();
     }
 
-    public Livro getLivro(String codigoDoLivro){
-        return cadastroDelivros.get(codigoDoLivro);
+    public Livro getLivro(String codigoDoLivro) throws LivroNaoCadastradoEx{
+        if(cadastroDelivros.get(codigoDoLivro) == null) {
+        	throw new LivroNaoCadastradoEx("Livro nao cadastrado! Codigo do livro nao existe");
+        }
+        else {
+        	return cadastroDelivros.get(codigoDoLivro);        	
+        }
     }
 
-    public Usuario getUsuario(int codigoDoUsuario){
-        return cadastroDeUsuarios.get(codigoDoUsuario);
+    public Usuario getUsuario(int codigoDoUsuario) throws UsuarioNaoCadastradoEx{
+        if(cadastroDeUsuarios.get(codigoDoUsuario) == null) {
+        	throw new UsuarioNaoCadastradoEx("Usuario nao cadastrado! Codigo do usuario nao existe");
+        	
+        }
+        else {
+        	return cadastroDeUsuarios.get(codigoDoUsuario);        	
+        }
     }
 
 	public Hashtable<Integer, Usuario> getCadastroDeUsuarios() {
