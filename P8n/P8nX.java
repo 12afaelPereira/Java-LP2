@@ -4,12 +4,16 @@ import java.awt.Choice;
 import java.awt.Dialog;
 import java.awt.Graphics;
 import java.awt.Label;
+import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class P8nX extends Applet implements ActionListener {
-	String str = "";
+	//String str = "";
+	public double peso = 0;
+	public double altura = 0;
+	public static MinhaListaOrdenavel listaOrdenavel = new MinhaListaOrdenavel();
 
 	/**
 	 * 
@@ -21,6 +25,7 @@ public class P8nX extends Applet implements ActionListener {
 
 	Label labelNome = new Label("Nome: ");
 	TextField inputNome = new TextField();
+	
 
 	Label labelNasciento = new Label("Data de nascimento: ");
 	TextField inputNascimento = new TextField();
@@ -35,21 +40,26 @@ public class P8nX extends Applet implements ActionListener {
 
 	Label labelListar = new Label("Listar por: ");
 	Choice choiceListarPor = new Choice();
+	
+	TextArea area = new TextArea();
+	
 
 	public void init() {
 
-		setSize(400, 400);
+		setSize(600, 400);
 
 		choiceGenero.addItem("Masculino");
 		choiceGenero.addItem("Feminino");
-		choiceGenero.addItem("Outro");
 
 		add(labelNome);
 		add(inputNome);
+		
+		
 		add(choiceGenero);
 
 		add(labelNasciento);
 		add(inputNascimento);
+		
 
 		add(labelPeso);
 		add(inputPeso);
@@ -71,6 +81,8 @@ public class P8nX extends Applet implements ActionListener {
 		choiceListarPor.addItem("Menor IMC");
 		add(choiceListarPor);
 
+		
+		add(area);
 	}
 
 	/*
@@ -91,16 +103,26 @@ public class P8nX extends Applet implements ActionListener {
 			String dataDeNascimento = inputNascimento.getText();
 
 			try {
-				double peso = Double.parseDouble(inputPeso.getText());
-				double altura = Double.parseDouble(inputPeso.getText());
+				peso = Double.parseDouble(inputPeso.getText());
+				altura = Double.parseDouble(inputAltura.getText());
 				
 			} catch (NumberFormatException e2) {
 
 				//Dialog d = new Dialog();
 				
-				// System.out.println("Erro");
+				System.out.println("Erro");
 			}
 
+			if(choiceGenero.equals("Masculino")) {
+				listaOrdenavel.add(new Homem(nome, dataDeNascimento, peso, altura));
+				area.setText("");
+				area.setText(listaOrdenavel.toString());
+			}
+			else {
+				listaOrdenavel.add(new Mulher(nome, dataDeNascimento, peso, altura));
+				area.setText("");
+				area.setText(listaOrdenavel.toString() + "\n");
+			}
 			// str = "Cadastro feito!";
 
 		}
