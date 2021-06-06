@@ -25,7 +25,6 @@ public class P8nX extends Applet implements ActionListener {
 
 	Label labelNome = new Label("Nome: ");
 	TextField inputNome = new TextField();
-	
 
 	Label labelNasciento = new Label("Data de nascimento: ");
 	TextField inputNascimento = new TextField();
@@ -40,6 +39,8 @@ public class P8nX extends Applet implements ActionListener {
 
 	Label labelListar = new Label("Listar por: ");
 	Choice choiceListarPor = new Choice();
+	
+	Button listar = new Button("Ordenar");
 	
 	TextArea area = new TextArea();
 	
@@ -80,6 +81,8 @@ public class P8nX extends Applet implements ActionListener {
 		choiceListarPor.addItem("Maior Altura");
 		choiceListarPor.addItem("Menor IMC");
 		add(choiceListarPor);
+		add(listar);
+		listar.addActionListener(this);
 
 		
 		add(area);
@@ -96,6 +99,7 @@ public class P8nX extends Applet implements ActionListener {
 
 		String buttonPressed = e.getActionCommand();
 
+		
 		if (buttonPressed.equals("Cadastrar")) {
 
 			String nome = inputNome.getText();
@@ -113,6 +117,11 @@ public class P8nX extends Applet implements ActionListener {
 				System.out.println("Erro");
 			}
 
+			inputNome.setText("");
+			inputNascimento.setText("");
+			inputPeso.setText("");
+			inputAltura.setText("");
+			
 			if(choiceGenero.equals("Masculino")) {
 				listaOrdenavel.add(new Homem(nome, dataDeNascimento, peso, altura));
 				area.setText("");
@@ -121,12 +130,20 @@ public class P8nX extends Applet implements ActionListener {
 			else {
 				listaOrdenavel.add(new Mulher(nome, dataDeNascimento, peso, altura));
 				area.setText("");
-				area.setText(listaOrdenavel.toString() + "\n");
+				area.setText(listaOrdenavel.toString());
 			}
 			// str = "Cadastro feito!";
 
 		}
-		// repaint();
+		
+		else if (buttonPressed.equals("Ordenar")) {
+			listaOrdenavel.ordena(choiceListarPor.getSelectedIndex()+1);
+			area.setText("");
+			area.setText(listaOrdenavel.toString());
+		}
+		
+		
+		repaint();
 
 	}
 }
