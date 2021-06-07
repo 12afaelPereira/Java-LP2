@@ -1,6 +1,14 @@
-public class Pessoa{
+import java.io.Serializable;
 
-    protected String nome = "";
+public class Pessoa implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 9138852946853441247L;
+	
+	
+	protected String nome = "";
     protected String dataDeNascimento = "";
 
 

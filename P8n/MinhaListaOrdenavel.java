@@ -1,10 +1,17 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class MinhaListaOrdenavel{
+public class MinhaListaOrdenavel implements Serializable{
 
-    public ArrayList pessoas = new ArrayList();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6401789465424352333L;
+	
+	
+	public ArrayList pessoas = new ArrayList();
 
     public void add(PessoaIMC pessoa){
         this.pessoas.add(pessoa);

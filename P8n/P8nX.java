@@ -1,19 +1,25 @@
 import java.applet.Applet;
 import java.awt.Button;
 import java.awt.Choice;
-import java.awt.Dialog;
-import java.awt.Graphics;
 import java.awt.Label;
 import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class P8nX extends Applet implements ActionListener {
-	//String str = "";
+public class P8nX extends Applet implements ActionListener, Serializable {
+
 	public double peso = 0;
 	public double altura = 0;
 	public static MinhaListaOrdenavel listaOrdenavel = new MinhaListaOrdenavel();
+	public File arquivoDeCadastros = null;
 
 	/**
 	 * 
@@ -41,6 +47,8 @@ public class P8nX extends Applet implements ActionListener {
 	Choice choiceListarPor = new Choice();
 	
 	Button listar = new Button("Ordenar");
+	
+	Button salvar = new Button("Adicionar cadastros");
 	
 	TextArea area = new TextArea();
 	
@@ -84,15 +92,14 @@ public class P8nX extends Applet implements ActionListener {
 		add(listar);
 		listar.addActionListener(this);
 
+		add(salvar);
+		salvar.addActionListener(this);
 		
 		add(area);
+		
+		checkFile();
 	}
 
-	/*
-	 * public void Paint(Graphics g) {
-	 * 
-	 * g.drawString(str, 20, 50); }
-	 */
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -132,7 +139,6 @@ public class P8nX extends Applet implements ActionListener {
 				area.setText("");
 				area.setText(listaOrdenavel.toString());
 			}
-			// str = "Cadastro feito!";
 
 		}
 		
@@ -142,10 +148,64 @@ public class P8nX extends Applet implements ActionListener {
 			area.setText(listaOrdenavel.toString());
 		}
 		
+		else if (buttonPressed.equals("Adicionar cadastros")) {
+			salvaArquivo();
+		}
+		
 		
 		repaint();
 
 	}
+	
+	public void checkFile() {
+
+		arquivoDeCadastros = new File("cadastrosIMC");
+		
+		if (arquivoDeCadastros.exists()) {
+			leArquivo();
+		
+		}
+	}
+	
+	public void leArquivo(){
+        try{
+            FileInputStream streamDoArquivo = new FileInputStream("cadastrosIMC");
+            ObjectInputStream arquivo = new ObjectInputStream(streamDoArquivo);
+
+            
+        	listaOrdenavel = (MinhaListaOrdenavel) arquivo.readObject();
+        	
+        	arquivo.close();
+        	streamDoArquivo.close();
+            
+        	
+        	area.setText("");
+			area.setText(listaOrdenavel.toString());
+        }
+        catch(IOException | ClassNotFoundException e){
+            System.out.println("Ocorreu um erro");
+            e.printStackTrace();
+        }
+    }
+	
+	public void salvaArquivo(){
+        try{
+            FileOutputStream streamDoArquivo = new FileOutputStream("cadastrosIMC");
+            ObjectOutputStream arquivo = new ObjectOutputStream(streamDoArquivo);
+
+            arquivo.writeObject(listaOrdenavel);
+            arquivo.flush();
+            arquivo.close();
+
+            streamDoArquivo.flush();
+            streamDoArquivo.close();
+            System.out.println("Arquivo salvo com sucesso!");
+        }
+        catch(IOException e){
+            System.out.println("Ocorreu um erro");
+            e.printStackTrace();
+        }
+    }
 }
 
 /*

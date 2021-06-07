@@ -1,6 +1,13 @@
-public class Mulher extends PessoaIMC{
+import java.io.Serializable;
 
-    public Mulher(String nome, String dataDeNascimento, double peso, double altura){
+public class Mulher extends PessoaIMC implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 779483987560969918L;
+
+	public Mulher(String nome, String dataDeNascimento, double peso, double altura){
         super(nome, dataDeNascimento, peso, altura);
     }
 

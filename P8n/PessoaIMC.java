@@ -1,6 +1,14 @@
-public abstract class PessoaIMC extends Pessoa{
+import java.io.Serializable;
 
-    protected double peso = 0;
+public abstract class PessoaIMC extends Pessoa implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2562894754714846638L;
+	
+	
+	protected double peso = 0;
     protected double altura = 0;
 
     public PessoaIMC(String nome, String dataDeNascimento, double peso, double altura){
